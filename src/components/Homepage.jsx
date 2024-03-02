@@ -14,6 +14,9 @@ export default function Homepage() {
         <Link to="/shop_all" className="btn">Shop now</Link>
         </div>
       </div>
+      <div className="partner">
+        
+      </div>
     </div>
   )
 }

@@ -11,7 +11,8 @@ body {
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  overflow-y: hidden;
+  overflow-x: hidden;
+  /* overflow-y: hidden; */
 }
 
 .Navbar {

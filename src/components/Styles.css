@@ -1,11 +1,11 @@
+/**------------------------------------------------------------------------
+*                           universal styles
+*------------------------------------------------------------------------**/
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-/**------------------------------------------------------------------------
- *                           universal styles
- *------------------------------------------------------------------------**/
 h1 {
   font-size: 65px;
 }
@@ -30,14 +30,13 @@ h6 {
 /**--------------------------------------------
  *               BANNER SECTION
  *---------------------------------------------**/
-
 .banner {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: flex-start;
   padding: 20px 50px;
-  height: 80vh;
+  height: 90vh;
   width: 100%;
 }
 
@@ -70,5 +69,11 @@ h6 {
 /*--------------- END OF SECTION --------------*/
 
 /**--------------------------------------------
- *               Partners SECTION
+ *               PARTNER SWIPER SECTION
  *---------------------------------------------**/
+.partner {
+  width: 100%;
+  margin: auto;
+  height: 500px;
+  background-color: white;
+}

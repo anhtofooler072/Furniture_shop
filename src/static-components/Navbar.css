@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-image: url("https://websitedemos.net/furniture-shop-04/wp-content/uploads/sites/1116/2022/07/hero-01.jpg");
+  background-size: cover;
+}
+
+.Navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  width: 100%;
+}
+
+.navButtons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navButtons a {
+  font-size: 20px;
+  padding: 0 14px;
+  text-decoration: none;
+  color: #333;
+  font-family: "Oswald", sans-serif;
+  transition: all 0.3s ease-in-out;
+}
+
+.navButtons a:hover {
+  color: #c19b83;
+  transform: scale(1.1);
+}

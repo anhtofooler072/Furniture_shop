@@ -74,6 +74,21 @@ h6 {
 .partner {
   width: 100%;
   margin: auto;
-  height: 500px;
+  height: 160px;
   background-color: white;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.swiper-slide svg {
+  width: 50%;
+  object-fit: cover;
 }

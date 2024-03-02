@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './components/Styles.css'
 import './App.css'
 import { BrowserRouter, Route, RouterProvider, Routes, createBrowserRouter } from 'react-router-dom'
 import Navbar from './static-components/Navbar'

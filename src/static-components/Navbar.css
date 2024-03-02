@@ -5,9 +5,12 @@
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Oswald", sans-serif;
   background-image: url("https://websitedemos.net/furniture-shop-04/wp-content/uploads/sites/1116/2022/07/hero-01.jpg");
   background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   overflow-y: hidden;
 }
 
@@ -16,6 +19,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 20px 50px;
+  z-index: 1000;
   width: 100%;
 }
 

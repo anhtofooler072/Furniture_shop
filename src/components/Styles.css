@@ -1,5 +1,74 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+/**------------------------------------------------------------------------
+ *                           universal styles
+ *------------------------------------------------------------------------**/
+h1 {
+  font-size: 65px;
+}
+
+h2 {
+  font-size: 45px;
+}
+
+h3 {
+  font-size: 35px;
+}
+
+h4 {
+  font-size: 22px;
+}
+
+h6 {
+  font-size: 12px;
+}
+/*---------------------------- END OF SECTION ----------------------------*/
+
+/**--------------------------------------------
+ *               BANNER SECTION
+ *---------------------------------------------**/
+
+.banner {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px 50px;
+  height: 80vh;
+  width: 100%;
+}
+
+.banneTitle {
+  font-size: 65px;
+  color: #fff;
+  font-family: "Oswald", sans-serif;
+  margin-bottom: 20px;
+}
+
+.bannerButton {
+  margin-top: 50px;
+}
+
+.btn {
+  font-size: 20px;
+  padding: 15px;
+  text-decoration: none;
+  background-color: #000000;
+  color: #fff;
+  font-family: "Oswald", sans-serif;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #c19b83;
+  color: #000000;
+  transform: scale(1.1);
+}
+/*--------------- END OF SECTION --------------*/
+
+/**--------------------------------------------
+ *               Partners SECTION
+ *---------------------------------------------**/

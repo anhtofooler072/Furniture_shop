@@ -8,6 +8,10 @@ import Bedroom from './components/Bedroom'
 import Living_room from './components/Living_room'
 import Office from './components/Office'
 import Homepage from './components/Homepage'
+import Story from './components/Story'
+import Contact from './components/Contact'
+import Help from './components/Help'
+import Login from './components/Login'
 
 function App() {
   return (
@@ -21,6 +25,10 @@ function App() {
           <Route path='/bedroom' element={<Bedroom/>}></Route>
           <Route path='/living_room' element={<Living_room/>}></Route>
           <Route path='/office' element={<Office/>}></Route>
+          <Route path='/story' element={<Story/>}></Route>
+          <Route path='/contact' element={<Contact/>}></Route>
+          <Route path='/help' element={<Help/>}></Route>
+          <Route path='/login' element={<Login/>}></Route>
         </Routes>
       </BrowserRouter>
     </>

@@ -8,6 +8,7 @@ body {
   font-family: "Poppins", sans-serif;
   background-image: url("https://websitedemos.net/furniture-shop-04/wp-content/uploads/sites/1116/2022/07/hero-01.jpg");
   background-size: cover;
+  overflow-y: hidden;
 }
 
 .Navbar {
@@ -18,13 +19,15 @@ body {
   width: 100%;
 }
 
-.navButtons {
+.navButtons,
+.navAboutUs {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.navButtons a {
+.navButtons a,
+.navAboutUs a {
   font-size: 20px;
   padding: 0 14px;
   text-decoration: none;
@@ -33,7 +36,8 @@ body {
   transition: all 0.3s ease-in-out;
 }
 
-.navButtons a:hover {
+.navButtons a:hover,
+.navAboutUs a:hover {
   color: #c19b83;
   transform: scale(1.1);
 }

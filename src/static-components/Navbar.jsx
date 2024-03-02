@@ -13,6 +13,11 @@ export default function Navbar() {
         <NavLink to="/living_room">Living Room</NavLink>
         <NavLink to="/office">Office</NavLink>
         </div>
+        <div className="navAboutUs">
+        <NavLink to="/story">Our Story</NavLink>
+        <NavLink to="/contact">Contact</NavLink>
+        <NavLink to="/help">Help</NavLink>
+        </div>
     </div>
   )
 }

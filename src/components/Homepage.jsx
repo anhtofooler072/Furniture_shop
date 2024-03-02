@@ -383,7 +383,25 @@ export default function Homepage() {
         </Swiper>
       </div>
       <div className="shopCategory">
-        <h2>Shop by category</h2>
+        <div className="shopCategory_div">
+          <div className="homepage_TitleBox">
+            <h6>Shop by category</h6>
+            <h2>Shop by category</h2>
+          </div>
+        </div>
+        <div className="shopCategory_div">
+          <div className="homepage_TitleBox">
+            <h6>Shop by category</h6>
+            <h2>Featured Product</h2>
+          </div>
+        </div>
+        <div className="newArrival"></div>
+        <div className="whyChooseUs">
+          <div className="homepage_TitleBox">
+            <h6>Best product</h6>
+            <h2>Why choose us</h2>
+          </div>
+        </div>
       </div>
     </div>
   )

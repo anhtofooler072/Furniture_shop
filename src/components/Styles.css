@@ -92,3 +92,37 @@ h6 {
   width: 50%;
   object-fit: cover;
 }
+/*--------------- END OF SECTION --------------*/
+
+/**--------------------------------------------
+ *               SHOP BY CATEGORY SECTION
+ *---------------------------------------------**/
+.shopCategory {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 50px 0;
+  background-color: white;
+}
+
+.shopCategory_div {
+  margin-bottom: 60px;
+}
+
+.homepage_TitleBox {
+  border-bottom: solid 2px #c39d867f;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.homepage_TitleBox h6 {
+  font-size: 14px;
+  font-weight: 400;
+  color: #7c7c7c;
+  font-family: "Oswald", sans-serif;
+  margin-bottom: 10px;
+}

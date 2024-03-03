@@ -1,0 +1,140 @@
+/**------------------------------------------------------------------------
+*                           universal styles
+*------------------------------------------------------------------------**/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+h1 {
+  font-size: 65px;
+}
+
+h2 {
+  font-size: 45px;
+}
+
+h3 {
+  font-size: 35px;
+}
+
+h4 {
+  font-size: 22px;
+}
+
+h6 {
+  font-size: 12px;
+}
+/*---------------------------- END OF SECTION ----------------------------*/
+
+/**--------------------------------------------
+ *               BANNER SECTION
+ *---------------------------------------------**/
+.banner {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px 50px;
+  height: 90vh;
+  width: 100%;
+}
+
+.banneTitle {
+  font-size: 65px;
+  color: #fff;
+  font-family: "Oswald", sans-serif;
+  margin-bottom: 20px;
+}
+
+.bannerButton {
+  margin-top: 50px;
+}
+
+.btn {
+  font-size: 20px;
+  padding: 15px;
+  text-decoration: none;
+  background-color: #000000;
+  color: #fff;
+  font-family: "Oswald", sans-serif;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #c19b83;
+  color: #000000;
+  transform: scale(1.1);
+}
+/*--------------- END OF SECTION --------------*/
+
+/**--------------------------------------------
+ *               PARTNER SWIPER SECTION
+ *---------------------------------------------**/
+.partner {
+  width: 100%;
+  margin: auto;
+  height: 160px;
+  background-color: white;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.swiper-slide svg {
+  width: 50%;
+  object-fit: cover;
+}
+/*--------------- END OF SECTION --------------*/
+
+/**--------------------------------------------
+ *               SHOP BY CATEGORY SECTION
+ *---------------------------------------------**/
+.shopCategory {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 50px 0;
+  background-color: white;
+}
+
+.shopCategory_div {
+  margin-bottom: 60px;
+}
+
+.homepage_TitleBox {
+  border-bottom: solid 2px #c39d867f;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.homepage_TitleBox h6 {
+  font-size: 14px;
+  font-weight: 400;
+  color: #7c7c7c;
+  font-family: "Oswald", sans-serif;
+  margin-bottom: 10px;
+}
+
+/**--------------------------------------------
+ *               SECTION WHY CHOOSE US
+ *---------------------------------------------**/
+.whyChooseUs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 50px 0;
+  background-color: #ffffff;
+}

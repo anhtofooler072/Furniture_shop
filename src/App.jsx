@@ -20,7 +20,7 @@ function App() {
     <>
       <BrowserRouter>
         <Navbar />
-        <ScrollToTop />
+        <ScrollToTop smooth/>
         <Routes>
           <Route path='/' element={<Homepage/>}></Route>
           <Route path='/shop_all' element={<Shop_all/>}></Route>

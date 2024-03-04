@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './components/Styles.css'
 import './App.css'
 import { BrowserRouter, Route, RouterProvider, Routes, createBrowserRouter } from 'react-router-dom'
+import ScrollToTop from "react-scroll-to-top";
 import Navbar from './static-components/Navbar'
 import Shop_all from './components/Shop_all'
 import Decor from './components/Decor'
@@ -19,6 +20,7 @@ function App() {
     <>
       <BrowserRouter>
         <Navbar />
+        <ScrollToTop />
         <Routes>
           <Route path='/' element={<Homepage/>}></Route>
           <Route path='/shop_all' element={<Shop_all/>}></Route>

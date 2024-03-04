@@ -10,11 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@uiw/react-back-to-top": "^1.2.3",
     "firebase": "^10.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.2",
+    "react-scroll-to-top": "^3.0.0",
     "swiper": "^11.0.7",
     "typewriter-effect": "^2.21.0"
   },

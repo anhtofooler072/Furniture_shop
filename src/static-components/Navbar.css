@@ -21,8 +21,14 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 20px 50px;
-  z-index: 1000;
+  z-index: 10;
   width: 100%;
+  position: fixed;
+  background: rgba(255, 255, 255, 0.418);
+  box-shadow: 0 8px 32px 0 rgba(120, 120, 120, 0.164);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(11px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .navButtons,

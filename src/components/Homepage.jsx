@@ -61,11 +61,7 @@ export default function Homepage() {
           <h1>
             <Typewriter
               options={{
-                strings: [
-                  "Up to 50% off",
-                  "Shop now and save big",
-                  "Limited time offer",
-                ],
+                strings: ["Up to 50% off", "Shop now and save big", "Limited time offer"],
                 delay: 20,
                 autoStart: true,
                 loop: true,

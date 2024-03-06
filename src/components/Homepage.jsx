@@ -57,11 +57,15 @@ export default function Homepage() {
     <div>
       <div className="banner">
         <div className="bannerTitle">
-          <h6>Black Friday in july</h6>
+          <h5>Black Friday in july</h5>
           <h1>
             <Typewriter
               options={{
-                strings: ["Up to 50% off", "Shop now and save big", "Limited time offer"],
+                strings: [
+                  "Up to 50% off",
+                  "Shop now and save big",
+                  "Limited time offer",
+                ],
                 delay: 20,
                 autoStart: true,
                 loop: true,
@@ -396,14 +400,14 @@ export default function Homepage() {
 
       <div className="shopCategory">
         <div className="shopCategory_div">
-          <div className="homepage_TitleBox">
+          <div className="TitleBox">
             <h6>Shop by category</h6>
             <h2>Shop by category</h2>
           </div>
         </div>
 
         <div className="shopCategory_div">
-          <div className="homepage_TitleBox">
+          <div className="TitleBox">
             <h6>Shop by category</h6>
             <h2>Featured Product</h2>
           </div>
@@ -414,7 +418,7 @@ export default function Homepage() {
       <div className="newArrival"></div>
 
       <div className="whyChooseUs">
-        <div className="homepage_TitleBox">
+        <div className="TitleBox">
           <h6>Best product</h6>
           <h2>Why choose us</h2>
         </div>

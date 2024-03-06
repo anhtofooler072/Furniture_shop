@@ -3,7 +3,7 @@ import React from "react";
 export default function Story() {
   return (
     <div className="OurStory">
-      <div className="aboutUs">
+      <div className="aboutUs_Header">
         <div className="TitleBox">
           <h6>About us</h6>
           <h2>Our Story</h2>
@@ -45,6 +45,43 @@ export default function Story() {
       </div>
       <div className="CoreValueStatement">
         <h2>Simplicity carried to an extreme becomes elegance</h2>
+      </div>
+      <div
+        className="aboutUs_Inner"
+        style={{ textAlign: "center" }}>
+        <div className="TitleBox">
+          <h6>About us</h6>
+          <h2>How it all started</h2>
+        </div>
+        <p style={{ marginTop: "40px", color: "#7c7c7c", lineHeight: "1.8", fontSize:'18px' }}>
+          Proin nec ante eu sem luctus bibendum. Sed ut fringilla dolor. Morbi
+          suscipit a nunc eu finibus. Nam rutrum mattis velit eget volutpat.
+          Fusce egestas mi urna, id pulvinar ipsum dictum eget. Mauris in dolor
+          velit. Vestibulum finibus felis non massa commodo molestie at id
+          justo. Quisque sollicitudin elit sit amet facilisis euismod. Fusce at
+          arcu sed libero lacinia dignissim id bibendum metus.
+        </p>
+      </div>
+      <div className="StoryBlock">
+        <div className="StoryBlock_title">
+          <h3>About the founder</h3>
+          <p>
+            Proin nec ante eu sem luctus bibendum. Sed ut fringilla dolor. Morbi
+            suscipit a nunc eu finibus. Nam rutrum mattis velit eget volutpat.
+            Fusce egestas mi urna, id pulvinar ipsum dictum eget. Mauris in
+            dolor velit. Vestibulum finibus felis non massa commodo molestie at
+            id justo. Quisque sollicitudin elit sit amet facilisis euismod.
+            Fusce at arcu sed libero lacinia dignissim id bibendum metus. Nam
+            rutrum mattis velit eget volutpat. Fusce egestas mi urna, id
+            pulvinar ipsum dictum eget.
+          </p>
+        </div>
+        <div className="StoryBlock_content">
+          <img
+            src="https://websitedemos.net/furniture-shop-04/wp-content/uploads/sites/1116/2022/07/about-02.jpg"
+            alt="founder"
+          />
+        </div>
       </div>
     </div>
   );

@@ -151,12 +151,20 @@ h6 {
   background-image: url(https://websitedemos.net/furniture-shop-04/wp-content/uploads/sites/1116/2022/07/bg-02.jpg);
   background-repeat: no-repeat;
 }
-.aboutUs {
+.aboutUs_Header {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 185px 0 50px 0;
+  padding: 185px 0 0 0;
+  background-color: #f5f5f5;
+}
+.aboutUs_Inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 100px 350px;
   background-color: #f5f5f5;
 }
 .aboutUsImg {
@@ -171,8 +179,8 @@ h6 {
   flex-direction: row;
   justify-content: space-around;
   align-items: flex-start;
+  background-color: #ffffff;
   width: 100%;
-  margin-top: 50px;
   padding: 60px;
 }
 .StoryBlock_title {

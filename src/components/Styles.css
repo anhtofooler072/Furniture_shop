@@ -6,6 +6,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 h1 {
   font-size: 65px;
 }
@@ -25,6 +26,7 @@ h4 {
 h6 {
   font-size: 12px;
 }
+
 /*---------------------------- END OF SECTION ----------------------------*/
 
 /**--------------------------------------------
@@ -66,6 +68,7 @@ h6 {
   color: #000000;
   transform: scale(1.1);
 }
+
 /*--------------- END OF SECTION --------------*/
 
 /**--------------------------------------------
@@ -92,6 +95,7 @@ h6 {
   width: 50%;
   object-fit: cover;
 }
+
 /*--------------- END OF SECTION --------------*/
 
 /**--------------------------------------------
@@ -137,4 +141,139 @@ h6 {
   flex-direction: column;
   padding: 50px 0;
   background-color: #ffffff;
+}
+
+/**--------------------------------------------
+ *               SHOP ALL
+ *---------------------------------------------**/
+
+.bg-product {
+  background-color: white;
+
+}
+
+.body-product {
+  max-width: 1340px;
+  margin: auto;
+  padding: 60px 14px;
+}
+
+.body-product .title-product .categories-name {
+  font-size: 65px;
+}
+
+.body-product .title-product .categories-tags {
+  font-size: 14px;
+}
+
+.body-product .product-section {
+  margin-top: 60px;
+}
+
+.product-section .toolbar-product {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product-section .toolbar-product p {
+  font-size: 15px;
+  opacity: 0.6;
+}
+
+.product-section .toolbar-product .sort-section {
+  padding: 6px 4px;
+  width: 11%;
+  border: 1px solid white;
+  font-family: "Oswald", sans-serif;
+  font-size: 15px;
+}
+
+.product-section .toolbar-product .sort-section:focus {
+  outline: 1px dotted black;
+}
+
+.item-list {
+  display: grid;
+  column-gap: 20px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.item-list .item {
+  margin-top: 20px;
+  background-color: #F1F3F2;
+  position: relative;
+}
+
+.item-list .item img {
+  width: 100%;
+}
+
+.item-list .sale{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.1% 2.2%;
+  top: 3%;
+  left: 6%;
+  background-color: white;
+  border-radius: 20px;
+  font-size: 13px;
+  box-shadow: 0px 5px 6px rgba(0,0,0,0.2);
+}
+
+.item-list .button-section{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 3%;
+  right: 6%;
+  opacity: 0;
+  transition: 0.2s;
+}
+.item-list .button-section i{
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px;
+  background-color: white;
+  border-radius: 20px;
+  font-size: 16px;
+  box-shadow: 0px 5px 6px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+.item-list .item:hover .button-section{
+  opacity: 1;
+}
+
+.item-list .item .item-name {
+  font-size: 23px;
+  text-align: center;
+  margin: 10px 0 5px;
+}
+
+.item-list .item .item-price {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.item-list .item .color-section {
+  display: flex;
+  justify-content: space-around;
+  width: 23%;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.item-list .item .color-section .match-color {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 3px solid white;
+  cursor: pointer;
 }

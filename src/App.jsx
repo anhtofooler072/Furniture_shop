@@ -22,12 +22,12 @@ function App() {
         <Navbar />
         <ScrollToTop smooth/>
         <Routes>
-          <Route path='/' element={<Homepage/>}></Route>
-          <Route path='/shop_all' element={<Shop_all/>}></Route>
-          <Route path='/decor' element={<Decor/>}></Route>
-          <Route path='/bedroom' element={<Bedroom/>}></Route>
-          <Route path='/living_room' element={<Living_room/>}></Route>
-          <Route path='/office' element={<Office/>}></Route>
+        <Route path='/'  element={<Homepage/>}></Route>
+          <Route path="/shop_all" element={<Shop_all categories="Shop"/>} />
+          <Route path='/decor' element={<Decor categories="Decor"/>}></Route>
+          <Route path='/bedroom' element={<Bedroom categories='Bedroom'/>}></Route>
+          <Route path='/living_room' element={<Living_room categories='Living Room'/>}></Route>
+          <Route path='/office' element={<Office categories='Office'/>}></Route>
           <Route path='/story' element={<Story/>}></Route>
           <Route path='/contact' element={<Contact/>}></Route>
           <Route path='/help' element={<Help/>}></Route>

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 // Import Firebase
 import {
@@ -404,6 +404,37 @@ export default function Homepage() {
             <h6>Shop by category</h6>
             <h2>Shop by category</h2>
           </div>
+        </div>
+
+        <div className="shopCategory_box">
+          <NavLink to="/bedroom">
+            <img
+              src="https://websitedemos.net/furniture-shop-04/wp-content/uploads/sites/1116/2022/07/cat-1-600x600.jpg"
+              alt="bedroom_Cate"
+            />
+            <span>Bedroom</span>
+          </NavLink>
+          <NavLink to="/decor">
+            <img
+              src="https://websitedemos.net/furniture-shop-04/wp-content/uploads/sites/1116/2022/07/cat-4-600x600.jpg"
+              alt="decor_Cate"
+            />
+            <span>Decor</span>
+          </NavLink>
+          <NavLink to="/living_room">
+            <img
+              src="https://websitedemos.net/furniture-shop-04/wp-content/uploads/sites/1116/2022/07/cat-3-600x600.jpg"
+              alt="living_room_Cate"
+            />
+            <span>Living Room</span>
+          </NavLink>
+          <NavLink to="/office">
+            <img
+              src="https://websitedemos.net/furniture-shop-04/wp-content/uploads/sites/1116/2022/07/cat-2-600x600.jpg"
+              alt="office_Cate"
+            />
+            <span>Office</span>
+          </NavLink>
         </div>
 
         <div className="shopCategory_div">

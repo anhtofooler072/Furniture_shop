@@ -26,6 +26,12 @@ import Typewriter from "typewriter-effect";
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
+// import react icons
+import { TbTruckDelivery } from "react-icons/tb";
+import { FaRegCreditCard } from "react-icons/fa6";
+import { FaCartArrowDown } from "react-icons/fa";
+import { RiSecurePaymentLine } from "react-icons/ri";
+
 export default function Homepage() {
   // firebase
   let [data, setData] = useState([]);
@@ -452,6 +458,42 @@ export default function Homepage() {
         <div className="TitleBox">
           <h6>Best product</h6>
           <h2>Why choose us</h2>
+        </div>
+        <div className="OurQualities">
+          <div className="OurQualities_Box">
+            <TbTruckDelivery style={{ fontSize: "50px", color: "#c19b83" }} />
+            <h3>Fast Delivery</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
+              saepe nisi modi. molestiae tempore quae doloremque amet!
+            </p>
+          </div>
+          <div className="OurQualities_Box">
+            <FaRegCreditCard style={{ fontSize: "50px", color: "#c19b83" }} />
+            <h3>Free Shipping</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
+              saepe nisi modi. molestiae tempore quae doloremque amet!
+            </p>
+          </div>
+          <div className="OurQualities_Box">
+            <RiSecurePaymentLine
+              style={{ fontSize: "50px", color: "#c19b83" }}
+            />
+            <h3>Secure Checkout</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
+              saepe nisi modi. molestiae tempore quae doloremque amet!
+            </p>
+          </div>
+          <div className="OurQualities_Box">
+            <FaCartArrowDown style={{ fontSize: "50px", color: "#c19b83" }} />
+            <h3>Easy Return</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
+              saepe nisi modi. molestiae tempore quae doloremque amet!
+            </p>
+          </div>
         </div>
       </div>
     </div>

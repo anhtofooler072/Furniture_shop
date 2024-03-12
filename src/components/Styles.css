@@ -188,6 +188,40 @@ h6 {
   background-color: #ffffff;
 }
 
+.OurQualities {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  padding: 50px 0;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.OurQualities_Box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  width: 20%;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.OurQualities_Box p {
+  font-size: 16px;
+  color: #7c7c7c;
+  font-family: "Oswald", sans-serif;
+  margin-top: 20px;
+  line-height: 1.5;
+}
+
+.OurQualities_Box h3 {
+  font-size: 27px;
+  font-family: "Oswald", sans-serif;
+  margin: 10px 0 -10px 0;
+}
 /*============================ END OF SECTION ============================*/
 
 /**========================================================================

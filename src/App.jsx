@@ -14,6 +14,7 @@ import Story from './components/Story'
 import Contact from './components/Contact'
 import Help from './components/Help'
 import Login from './components/Login'
+import Footer from './static-components/Footer';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path='/help' element={<Help/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
         </Routes>
+        <Footer />
       </BrowserRouter>
     </>
   )

@@ -3,7 +3,6 @@ import './components/Styles.css'
 import './App.css'
 import { BrowserRouter, Route, RouterProvider, Routes, createBrowserRouter } from 'react-router-dom'
 import ScrollToTop from "react-scroll-to-top";
-import Navbar from './static-components/Navbar'
 import Shop_all from './components/Shop_all'
 import Decor from './components/Decor'
 import Bedroom from './components/Bedroom'
@@ -14,7 +13,8 @@ import Story from './components/Story'
 import Contact from './components/Contact'
 import Help from './components/Help'
 import Login from './components/Login'
-import Footer from './static-components/Footer';
+import Navbar from './components/static-components/Navbar';
+import Footer_components from './components/static-components/Footer';
 
 function App() {
   return (
@@ -34,7 +34,7 @@ function App() {
           <Route path='/help' element={<Help/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
         </Routes>
-        <Footer />
+        <Footer_components />
       </BrowserRouter>
     </>
   )

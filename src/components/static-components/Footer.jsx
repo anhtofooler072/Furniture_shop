@@ -5,7 +5,7 @@ import { FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import "./Static.css";
 
-export default function Footer() {
+export default function Footer_components() {
   return (
     <div className="footerContainer">
       <div className="footerNav">

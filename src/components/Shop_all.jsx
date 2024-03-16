@@ -3,9 +3,11 @@ import React, { useContext, useEffect, useState } from 'react'
 import { FirebaseContext } from '../contexts/FirebaseProvider';
 import ProductItem from './ProductItem';
 
+
 export default function Shop_all(props) {  
   let [data, setData] = useState([])
   const { messItem } = useContext(FirebaseContext)
+  
   useEffect(() => {
     const q = query(messItem);
     const unsubscribe = onSnapshot(q, (querySnapshot) => {

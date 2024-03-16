@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { FaEye } from "react-icons/fa";
 import { PiBasket } from "react-icons/pi";
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export default function ProductItem(props) {
     let [img, setImg] = useState(props.it.img[0])
+    let navigate=useNavigate()
 
     let findCategories=(props.it.categories).findIndex((name)=>{
         return name==props.categories
@@ -25,7 +27,7 @@ export default function ProductItem(props) {
                 <p className='sale'>{checkStock}</p>
                 <div className="button-section">
                 <i><PiBasket/></i>
-                <i><FaEye /></i>
+                <i onClick={()=>{navigate('/productdetail/'+props.it.id)}}><FaEye /></i>
                 </div>
                 <p className="item-name">{props.it.productName}</p>
                 <p className="item-price">${props.it.price}</p>

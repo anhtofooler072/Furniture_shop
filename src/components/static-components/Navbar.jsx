@@ -1,6 +1,7 @@
-import './Navbar.css' 
+import './Static.css' 
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { LuShoppingCart } from "react-icons/lu";
 
 export default function Navbar() {
   return (
@@ -17,6 +18,7 @@ export default function Navbar() {
         <NavLink to="/story">Our Story</NavLink>
         <NavLink to="/contact">Contact</NavLink>
         <NavLink to="/help">Help</NavLink>
+        <NavLink to="/cart"><LuShoppingCart /></NavLink>
         </div>
     </div>
   )

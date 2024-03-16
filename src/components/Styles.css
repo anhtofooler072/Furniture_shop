@@ -155,10 +155,10 @@ h6 {
 .shopCategory_box {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
-  width: 1250px;
+  width: 1270px;
   margin-bottom: 40px;
 }
 
@@ -227,9 +227,9 @@ h6 {
 }
 
 .reviewContainer {
-  width: 100%;
+  width: 1270px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex-direction: row;
 }
@@ -240,11 +240,16 @@ h6 {
   align-items: center;
   flex-direction: column;
   padding: 20px;
-  height: 25vh;
+  height: 300px;
   width: 30%;
+  border-radius: 10px;
   background-color: #f1f2f2;
   text-align: center;
-  margin: 0 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.reviewCard:hover {
+  box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.096);
 }
 
 /**--------------------------------------------
@@ -431,6 +436,43 @@ h6 {
   width: 100%;
   font-size: 16px;
   font-family: "Oswald", sans-serif;
+}
+/**--------------------------------------------
+ *               HELP SECTION
+ *---------------------------------------------**/
+.FaQ_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 850px;
+  margin: 50px 0;
+  border-radius: 10px;
+  border: solid 2px #343434;
+  overflow: hidden;
+}
+.FaQ_card {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 100%;
+  cursor: pointer;
+}
+.FaQ_card h3 {
+  font-size: 25px;
+  font-family: "Oswald", sans-serif;
+  color: #000000;
+}
+.FaQ_quest,
+.FaQ_ans {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px;
+  flex-direction: row;
+  width: 100%;
+  border-bottom: solid 1px #36363666;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 /*============================ END OF SECTION ============================*/
 

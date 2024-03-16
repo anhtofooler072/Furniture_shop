@@ -1,6 +1,7 @@
 import React from "react";
 import { CiCirclePlus } from "react-icons/ci";
 import { CiCircleMinus } from "react-icons/ci";
+import { NavLink } from "react-router-dom";
 
 export default function Cart() {
   return (
@@ -78,7 +79,9 @@ export default function Cart() {
                 <p>Total</p>
                 <p>$310</p>
               </div>
-              <button className="button_submit">Checkout</button>
+              <NavLink to="/checkout">
+                <button className="button_submit">Checkout</button>
+              </NavLink>
             </div>
           </div>
         </div>

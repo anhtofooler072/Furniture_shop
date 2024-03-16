@@ -16,6 +16,7 @@ import Login from './components/Login'
 import Navbar from './components/static-components/Navbar';
 import Footer_components from './components/static-components/Footer';
 import Cart from './components/Cart';
+import Checkout from './components/Checkout';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path='/contact' element={<Contact/>}></Route>
           <Route path='/help' element={<Help/>}></Route>
           <Route path='/cart' element={<Cart/>}></Route>
+          <Route path='/checkout' element={<Checkout/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
         </Routes>
         <Footer_components />

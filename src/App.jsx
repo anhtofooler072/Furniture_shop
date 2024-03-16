@@ -15,6 +15,7 @@ import Help from './components/Help'
 import Login from './components/Login'
 import Navbar from './components/static-components/Navbar';
 import Footer_components from './components/static-components/Footer';
+import Cart from './components/Cart';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path='/story' element={<Story/>}></Route>
           <Route path='/contact' element={<Contact/>}></Route>
           <Route path='/help' element={<Help/>}></Route>
+          <Route path='/cart' element={<Cart/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
         </Routes>
         <Footer_components />

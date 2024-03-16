@@ -45,11 +45,9 @@ export default function Help() {
               }}
             />
           </div>
-          {item.isOpen && (
-            <div className="FaQ_ans">
-              <p>{item.answer}</p>
-            </div>
-          )}
+          <div className={item.isOpen? 'FaQ_ans' : 'FaQ_ans_none'}>
+            <p>{item.answer}</p>
+          </div>
         </div>
       );
     });

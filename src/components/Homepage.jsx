@@ -12,6 +12,9 @@ import {
 import React, { useContext, useEffect, useState } from "react";
 import { FirebaseContext } from "../contexts/FirebaseProvider";
 
+//ipmort React Player
+import ReactPlayer from "react-player/youtube";
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -31,6 +34,7 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { FaRegCreditCard } from "react-icons/fa6";
 import { FaCartArrowDown } from "react-icons/fa";
 import { RiSecurePaymentLine } from "react-icons/ri";
+import FeaturedProd from "./FeaturedProduct";
 
 export default function Homepage() {
   // firebase
@@ -51,12 +55,20 @@ export default function Homepage() {
   /**--------------------------------------------
    *               functions
    *---------------------------------------------**/
+
+  /**--------------------------------------------
+   *               SECTION RENDER
+   *---------------------------------------------**/
   const renderProduct = () => {
-    return data.map((item) => {
-      return <div key={item.id}>{item.productName}</div>;
+    return data.map((it) => {
+      return (
+        <FeaturedProd
+          it={it}
+          key={it.id}
+        />
+      );
     });
   };
-
   /*--------------- END OF SECTION --------------*/
 
   return (
@@ -448,11 +460,48 @@ export default function Homepage() {
             <h6>Shop by category</h6>
             <h2>Featured Product</h2>
           </div>
-          {renderProduct()}
+          <div className="item-list">{renderProduct()}</div>
+        </div>
+        <div className="newArrival">
+          {/* <div className="newArrival_banner">
+            <div className="overlay">
+              <h6>New Arrival</h6>
+              <h3>Brand new, modern lamps collection</h3>
+              <p>Ideal for offices, bedrooms and all in between.</p>
+            </div>
+          </div> */}
+          <ReactPlayer
+            url="https://www.youtube.com/watch?v=A6ilRdDjOFw"
+            volume={0.1}
+            loop={true}
+            width={"1270px"}
+            height={"600px"}
+          />
+        </div>
+        <div className="reviewContainer">
+          <div className="reviewCard">
+            <p>
+              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
+              saepe nisi modi. molestiae tempore quae doloremque amet!"
+            </p>
+            <h6>John Doe</h6>
+          </div>
+          <div className="reviewCard">
+            <p>
+              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
+              saepe nisi modi. molestiae tempore quae doloremque amet!"
+            </p>
+            <h6>John Doe</h6>
+          </div>
+          <div className="reviewCard">
+            <p>
+              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
+              saepe nisi modi. molestiae tempore quae doloremque amet!"
+            </p>
+            <h6>John Doe</h6>
+          </div>
         </div>
       </div>
-
-      <div className="newArrival"></div>
 
       <div className="whyChooseUs">
         <div className="TitleBox">

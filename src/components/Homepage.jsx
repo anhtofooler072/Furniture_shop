@@ -35,6 +35,7 @@ import { FaRegCreditCard } from "react-icons/fa6";
 import { FaCartArrowDown } from "react-icons/fa";
 import { RiSecurePaymentLine } from "react-icons/ri";
 import FeaturedProd from "./FeaturedProduct";
+import RatingStar from "./sticker_sheets/RatingStar";
 
 export default function Homepage() {
   // firebase
@@ -463,13 +464,13 @@ export default function Homepage() {
           <div className="item-list">{renderProduct()}</div>
         </div>
         <div className="newArrival">
-          {/* <div className="newArrival_banner">
+          <div className="newArrival_banner">
             <div className="overlay">
               <h6>New Arrival</h6>
               <h3>Brand new, modern lamps collection</h3>
               <p>Ideal for offices, bedrooms and all in between.</p>
             </div>
-          </div> */}
+          </div>
           <ReactPlayer
             url="https://www.youtube.com/watch?v=A6ilRdDjOFw"
             volume={0.1}
@@ -480,6 +481,7 @@ export default function Homepage() {
         </div>
         <div className="reviewContainer">
           <div className="reviewCard">
+            <RatingStar rating={5} />
             <p>
               "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
               saepe nisi modi. molestiae tempore quae doloremque amet!"
@@ -487,6 +489,7 @@ export default function Homepage() {
             <h6>John Doe</h6>
           </div>
           <div className="reviewCard">
+            <RatingStar rating={4} />
             <p>
               "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
               saepe nisi modi. molestiae tempore quae doloremque amet!"
@@ -494,6 +497,7 @@ export default function Homepage() {
             <h6>John Doe</h6>
           </div>
           <div className="reviewCard">
+            <RatingStar rating={3} />
             <p>
               "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
               saepe nisi modi. molestiae tempore quae doloremque amet!"

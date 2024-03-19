@@ -1,7 +1,7 @@
 /**========================================================================
  *                           Universal Styles
  *========================================================================**/
-* {
+ * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -648,10 +648,24 @@ h6 {
   display: flex;
   flex-flow: wrap;
   width: 49%;
+  position: relative;
 }
 
 .product-detail .detail-section .product-img img {
   width: 100%;
+}
+.product-detail .detail-section .product-img .sale{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8% 2%;
+  top: 1%;
+  left: 2%;
+  background-color: white;
+  border-radius: 20px;
+  font-size: 13px;
+  box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.2);
 }
 
 .detail-section .product-img .another-img {
@@ -1207,9 +1221,32 @@ h6 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 60%;
+  width: 70%;
   border-radius: 10px;
   background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.cart_left .nametag-cart{
+  width: 100%;
+  display: flex;
+  /* justify-content: space-around; */
+  align-items: center;
+  background-color: #F1F2F2;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.cart_left .nametag-cart p{
+  padding: 10px 0;
+}
+.nametag-cart .product{
+  width: 35%;
+  text-align: center;
+  margin-right: 20px;
+}
+.nametag-cart .price{
+  width: 21%;
+}
+.nametag-cart .quanlity{
+  width: 22%;
 }
 .cart_item {
   display: flex;
@@ -1218,12 +1255,25 @@ h6 {
   flex-direction: row;
   width: 100%;
   padding: 20px 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.cart_item .cart-product{
+  display: flex;
+  align-items: center;
+}
+.cart_item .cart-product p{
+  width: 100px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .cart_item_img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  overflow: hidden;
+  display: flex;
+  margin-right: 25px;
 }
 .cart_item_img img {
   width: 100px;
@@ -1232,12 +1282,22 @@ h6 {
   object-position: center;
   border-radius: 50%;
 }
+
 .cart_item_quantity {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: row;
   gap: 10px;
+  width: 30%;
+}
+.cart_item_quantity .amount{
+  font-size: 22px;
+  cursor: pointer;
+}
+.cart_item .delete-cart{
+  font-size: 22px;
+  cursor: pointer;
 }
 .cart_item_info {
   display: flex;
@@ -1245,14 +1305,20 @@ h6 {
   align-items: center;
   flex-direction: row;
   gap: 50px;
+  width: 40%;
 }
+.cart_item_info .price{
+  width: 42%;
+}
+
 .cart_right {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  width: 40%;
+  width: 30%;
   padding: 50px 30px;
+  padding-top: 0;
   border-radius: 10px;
   background-color: #ffffff;
 }
@@ -1262,10 +1328,25 @@ h6 {
   align-items: flex-start;
   flex-direction: column;
   width: 100%;
+}
+.cart_summary h3{
+  font-size: 25px;
   padding: 20px 0;
+  background-color: #F1F2F2;
+  width: 100%;
+  text-align: center;
+  border-bottom-left-radius: 45%;
+  border-bottom-right-radius: 45%;
+}
+.cart_summary a{
+  width: 100%;
+  padding: 0;
 }
 .cart_summary button {
   margin-top: 50px;
+  width: 100%;
+  padding: 15px 0;
+  font-size: 18px;
 }
 .summary_item {
   display: flex;

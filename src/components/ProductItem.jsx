@@ -5,6 +5,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 export default function ProductItem(props) {
     let [img, setImg] = useState(props.it.img[0])
+    let [count,setCount]=useState(1)
     let navigate=useNavigate()
 
     let findCategories=(props.it.categories).findIndex((name)=>{
@@ -19,6 +20,30 @@ export default function ProductItem(props) {
     const changeColor = (color) => {
         setImg(color)
     }
+    let addtoCart = () => {
+        if (props.it.stock == 'out of stock') {
+          alert('hết hàng')
+        } else {
+          let cartstorage = []
+          if (localStorage.getItem('yourcart') !== null) {
+            cartstorage = JSON.parse(localStorage.getItem('yourcart'))
+          }
+          let yourcart = {
+            id: props.it.id,
+            img: img,
+            amount: count
+          }
+          let findcart = cartstorage.findIndex((it) => {
+            return it.id == yourcart.id
+          })
+          if (findcart > -1) {
+            cartstorage[findcart].amount += yourcart.amount
+          } else {
+            cartstorage.push(yourcart)
+          }
+          localStorage.setItem('yourcart', JSON.stringify(cartstorage))
+        }
+      }
 
     if(findCategories>-1 || props.categories=='Shop All'){
         return (
@@ -26,7 +51,7 @@ export default function ProductItem(props) {
                 <img src={img} alt="item" />
                 <p className='sale'>{checkStock}</p>
                 <div className="button-section">
-                <i><PiBasket/></i>
+                <i onClick={addtoCart}><PiBasket/></i>
                 <i onClick={()=>{navigate('/productdetail/'+props.it.id)}}><FaEye /></i>
                 </div>
                 <p className="item-name">{props.it.productName}</p>

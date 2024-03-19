@@ -26,26 +26,28 @@ export default function Login() {
         <div className="login_section">
           <div className="login_box">
             <div className="login_box_input">
+              <p>Email</p>
               <input
                 type="text"
                 placeholder="Email"
               />
+            </div>
+            <div className="login_box_input">
+              <p>Password</p>
               <input
                 type="password"
                 placeholder="Password"
               />
             </div>
-            <div className="login_box_button">
-              <button>Login</button>
-            </div>
-            <div className="login_box_google">
-              <button
-                onClick={signInWithGoogle}
-                className="button_submit">
-                <FcGoogle style={{ fontSize: "25px" }} />
-                <p>Login with Google</p>
-              </button>
-            </div>
+          </div>
+          <div className="login_box_button">
+            <button className="button_submit">Login</button>
+            <button
+              onClick={signInWithGoogle}
+              className="button_submit">
+              <FcGoogle style={{ fontSize: "25px" }} />
+              <p>Login with Google</p>
+            </button>
           </div>
         </div>
       </div>

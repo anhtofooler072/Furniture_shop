@@ -1,7 +1,7 @@
 /**========================================================================
  *                           Universal Styles
  *========================================================================**/
- * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -27,6 +27,10 @@ h6 {
   font-size: 12px;
 }
 .button_submit {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
   font-family: "Oswald", sans-serif;
   font-weight: 600;
   padding: 10px 30px;
@@ -654,7 +658,7 @@ h6 {
 .product-detail .detail-section .product-img img {
   width: 100%;
 }
-.product-detail .detail-section .product-img .sale{
+.product-detail .detail-section .product-img .sale {
   position: absolute;
   display: flex;
   align-items: center;
@@ -1226,26 +1230,26 @@ h6 {
   background-color: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
-.cart_left .nametag-cart{
+.cart_left .nametag-cart {
   width: 100%;
   display: flex;
   /* justify-content: space-around; */
   align-items: center;
-  background-color: #F1F2F2;
+  background-color: #f1f2f2;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-.cart_left .nametag-cart p{
+.cart_left .nametag-cart p {
   padding: 10px 0;
 }
-.nametag-cart .product{
+.nametag-cart .product {
   width: 35%;
   text-align: center;
   margin-right: 20px;
 }
-.nametag-cart .price{
+.nametag-cart .price {
   width: 21%;
 }
-.nametag-cart .quanlity{
+.nametag-cart .quanlity {
   width: 22%;
 }
 .cart_item {
@@ -1257,11 +1261,11 @@ h6 {
   padding: 20px 30px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-.cart_item .cart-product{
+.cart_item .cart-product {
   display: flex;
   align-items: center;
 }
-.cart_item .cart-product p{
+.cart_item .cart-product p {
   width: 100px;
   cursor: pointer;
   white-space: nowrap;
@@ -1291,11 +1295,11 @@ h6 {
   gap: 10px;
   width: 30%;
 }
-.cart_item_quantity .amount{
+.cart_item_quantity .amount {
   font-size: 22px;
   cursor: pointer;
 }
-.cart_item .delete-cart{
+.cart_item .delete-cart {
   font-size: 22px;
   cursor: pointer;
 }
@@ -1307,7 +1311,7 @@ h6 {
   gap: 50px;
   width: 40%;
 }
-.cart_item_info .price{
+.cart_item_info .price {
   width: 42%;
 }
 
@@ -1329,16 +1333,16 @@ h6 {
   flex-direction: column;
   width: 100%;
 }
-.cart_summary h3{
+.cart_summary h3 {
   font-size: 25px;
   padding: 20px 0;
-  background-color: #F1F2F2;
+  background-color: #f1f2f2;
   width: 100%;
   text-align: center;
   border-bottom-left-radius: 45%;
   border-bottom-right-radius: 45%;
 }
-.cart_summary a{
+.cart_summary a {
   width: 100%;
   padding: 0;
 }
@@ -1360,20 +1364,20 @@ h6 {
 /**----------------------
  *    SECTION CHECKOUT
  *------------------------**/
-.checkout-container{
+.checkout-container {
   width: 1380px;
   display: flex;
   justify-content: space-between;
- }
-.checkout-container form{
+}
+.checkout-container form {
   width: 50%;
- }
- .checkout-container form button{
+}
+.checkout-container form button {
   width: 100%;
- }
- .checkout-container .your-order{
+}
+.checkout-container .your-order {
   width: 50%;
- }
+}
 .checkout_form {
   display: flex;
   justify-content: center;
@@ -1391,7 +1395,7 @@ h6 {
   flex-direction: column;
   width: 100%;
 }
-.checkout_form .tag-name{
+.checkout_form .tag-name {
   margin-bottom: 12px;
   font-size: 23px;
   font-weight: bold;
@@ -1407,26 +1411,26 @@ h6 {
   font-family: "Oswald", sans-serif;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
-.checkout_info .type-section{
+.checkout_info .type-section {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
-.checkout_info .type-section .error{
+.checkout_info .type-section .error {
   color: red;
   width: 49%;
   margin-bottom: 20px;
 }
-.checkout_info .type-section input{
+.checkout_info .type-section input {
   width: 49%;
 }
-.checkout_info .address input{
+.checkout_info .address input {
   width: 32%;
 }
-.checkout_info .address select{
+.checkout_info .address select {
   width: 32%;
 }
-.checkout_info select{
+.checkout_info select {
   padding: 15px 20px;
   margin-bottom: 20px;
   border: none;
@@ -1436,7 +1440,7 @@ h6 {
   font-size: 16px;
   font-family: "Oswald", sans-serif;
 }
-.bank-section .type-bank{
+.bank-section .type-bank {
   display: flex;
   align-items: center;
   padding: 15px 20px;
@@ -1451,14 +1455,14 @@ h6 {
   background-color: white;
   margin-top: 15px;
 }
-.bank-section .type-bank input{
+.bank-section .type-bank input {
   width: 20px;
   margin: 0;
 }
-.bank-section .type-bank span{
+.bank-section .type-bank span {
   margin-left: 10px;
 }
-.bank-section .detail-payment{
+.bank-section .detail-payment {
   font-size: 14px;
   padding: 12px 16px;
   background-color: #d1d3d3;

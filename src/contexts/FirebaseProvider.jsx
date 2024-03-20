@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection } from "firebase/firestore";
+import { GoogleAuthProvider } from "firebase/auth";
 
 
 
@@ -20,7 +21,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const FirebaseContext = createContext();
 
-
+// const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+// auth.languageCode = "it";
 
 
 const FirebaseProvider = ({ children }) => {
@@ -29,7 +32,7 @@ const FirebaseProvider = ({ children }) => {
   const messItem = collection(db, "productItem"); // Specify the collection path here
   const messCustomer=collection(db,"customer");
   return (
-    <FirebaseContext.Provider value={{ app, messCollect, messItem , messCustomer}}>
+    <FirebaseContext.Provider value={{ app, messCollect, messItem , messCustomer, provider}}>
       {children}
     </FirebaseContext.Provider>
   );

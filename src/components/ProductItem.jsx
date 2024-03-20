@@ -16,8 +16,10 @@ export default function ProductItem(props) {
     if(props.it.stock=='out of stock'){
         checkStock='Out of stock'
     }
-
-    const changeColor = (color) => {
+    let [colorCode, setColorCode] = useState(props.it.productColor[0].colorCode)
+    const changeColor = (color,colorCode) => {
+        setColorCode(colorCode)
+        console.log(colorCode)
         setImg(color)
     }
     let addtoCart = () => {
@@ -30,7 +32,7 @@ export default function ProductItem(props) {
           }
           let yourcart = {
             id: props.it.id,
-            img: img,
+            color:colorCode,
             amount: count
           }
           let findcart = cartstorage.findIndex((it) => {
@@ -57,9 +59,9 @@ export default function ProductItem(props) {
                 <p className="item-name">{props.it.productName}</p>
                 <p className="item-price">${props.it.price}</p>
                 <div className="color-section">
-                    <div className="match-color" style={{ backgroundColor: `${props.it.productColor[0].colorCode}` }} onClick={() => changeColor(`${props.it.img[0]}`)}></div>
-                    <div className="match-color" style={{ backgroundColor: `${props.it.productColor[1].colorCode}` }} onClick={() => changeColor(`${props.it.img[1]}`)}></div>
-                    <div className="match-color" style={{ backgroundColor: `${props.it.productColor[2].colorCode}` }} onClick={() => changeColor(`${props.it.img[2]}`)}></div>
+                    <div className="match-color" style={{ backgroundColor: `${props.it.productColor[0].colorCode}` }} onClick={() => changeColor(`${props.it.img[0]}`,`${props.it.productColor[0].colorCode}`)}></div>
+                    <div className="match-color" style={{ backgroundColor: `${props.it.productColor[1].colorCode}` }} onClick={() => changeColor(`${props.it.img[1]}`,`${props.it.productColor[1].colorCode}`)}></div>
+                    <div className="match-color" style={{ backgroundColor: `${props.it.productColor[2].colorCode}` }} onClick={() => changeColor(`${props.it.img[2]}`,`${props.it.productColor[2].colorCode}`)}></div>
                 </div>
             </div>
         )

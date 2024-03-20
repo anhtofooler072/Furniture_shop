@@ -11,6 +11,14 @@ export default function Login() {
     signInWithPopup(auth, provider)
       .then((result) => {
         console.log(result);
+        // save  the user to the local storage
+        let userInfo = {
+          name: result.user.displayName,
+          email: result.user.email,
+          photo: result.user.photoURL,
+          user_id: result.user.uid,
+        };
+        localStorage.setItem("user", JSON.stringify(userInfo));
       })
       .catch((error) => {
         console.log(error);

@@ -1,14 +1,16 @@
 import { onSnapshot, query } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
-import { FirebaseContext } from '../contexts/FirebaseProvider';
-import { NavLink } from "react-router-dom";
+import { FirebaseContext } from "../contexts/FirebaseProvider";
+import { NavLink, useNavigate } from "react-router-dom";
 import CartProduct from "./CartProduct";
+import { signInWithPopup, getAuth } from "firebase/auth";
+import { FcGoogle } from "react-icons/fc";
 
 export default function Cart() {
-  let storagebuy = null
+  let storagebuy = null;
 
-  let [data, setData] = useState([])
-  const { messItem } = useContext(FirebaseContext)
+  let [data, setData] = useState([]);
+  const { messItem } = useContext(FirebaseContext);
 
   useEffect(() => {
     const q = query(messItem);
@@ -17,61 +19,107 @@ export default function Cart() {
       querySnapshot.forEach((doc) => {
         temp.push({ ...doc.data(), id: doc.id });
       });
-      setData(temp)
+      setData(temp);
     });
-  }, [])
+  }, []);
 
-  if (localStorage.getItem('yourcart') !== null) {
-    storagebuy = JSON.parse(localStorage.getItem('yourcart'))
+  if (localStorage.getItem("yourcart") !== null) {
+    storagebuy = JSON.parse(localStorage.getItem("yourcart"));
   }
 
-  let rendercart = (() => {
+  let rendercart = () => {
     if (storagebuy !== null) {
       return storagebuy.map((product) => {
         let findIndex = data.findIndex((it) => {
-          return it.id == product.id
-        })
-        let dataProduct = data[findIndex]
+          return it.id == product.id;
+        });
+        let dataProduct = data[findIndex];
         return (
-          <CartProduct storage={product} data={dataProduct} key={product.id} />
-        )
-      })
+          <CartProduct
+            storage={product}
+            data={dataProduct}
+            key={product.id}
+          />
+        );
+      });
     }
-  })
+  };
 
-  let [subtotal, setSubtotal] = useState(0)
+  let [subtotal, setSubtotal] = useState(0);
   useEffect(() => {
     if (storagebuy !== null) {
-      let allsubtotal = 0
-      let subtotal = 0
+      let allsubtotal = 0;
+      let subtotal = 0;
       storagebuy.map((product) => {
         let findIndex = data.findIndex((it) => {
-          return it.id == product.id
-        })
-        let dataProduct = data[findIndex]
-        subtotal = dataProduct?.price * product?.amount
+          return it.id == product.id;
+        });
+        let dataProduct = data[findIndex];
+        subtotal = dataProduct?.price * product?.amount;
 
-        console.log(subtotal)
-        allsubtotal += subtotal
-
-      })
-      setSubtotal(allsubtotal)
+        console.log(subtotal);
+        allsubtotal += subtotal;
+      });
+      setSubtotal(allsubtotal);
     }
-  }, [storagebuy])
+  }, [storagebuy]);
 
-  let [total, setTotal] = useState(0)
+  let [total, setTotal] = useState(0);
   useEffect(() => {
     if (storagebuy !== null) {
-      setTotal(subtotal + ship())
+      setTotal(subtotal + ship());
     }
-  }, [subtotal])
-  let ship=(()=>{
-    if(subtotal>0){
-      return 25
-    }else{
-      return 0
+  }, [subtotal]);
+  let ship = () => {
+    if (subtotal > 0) {
+      return 25;
+    } else {
+      return 0;
     }
-  })
+  };
+
+  // check the local storage if the user is logged in
+  let navigate = useNavigate();
+  let user = JSON.parse(localStorage.getItem("user"));
+  const auth = getAuth();
+  const { provider } = useContext(FirebaseContext);
+  const signInWithGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        console.log(result);
+        // save  the user to the local storage
+        let userInfo = {
+          name: result.user.displayName,
+          email: result.user.email,
+          photo: result.user.photoURL,
+          user_id: result.user.uid,
+        };
+        localStorage.setItem("user", JSON.stringify(userInfo));
+        navigate("/checkout");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const process_checkout = () => {
+    if (user) {
+      return (
+        <NavLink to="/checkout">
+          <button className="button_submit">Process to Checkout</button>
+        </NavLink>
+      );
+    } else {
+      return (
+        <button
+          onClick={signInWithGoogle}
+          className="button_submit">
+          <FcGoogle style={{ fontSize: "25px" }} />
+          <p>Login with Google to Checkout</p>
+        </button>
+      );
+    }
+  };
+
   return (
     <div>
       <div className="aboutUs_Header">
@@ -103,9 +151,7 @@ export default function Cart() {
                 <p>Total</p>
                 <p>${total}</p>
               </div>
-              <NavLink to="/checkout">
-                <button className="button_submit">Process to Checkout</button>
-              </NavLink>
+              {process_checkout()}
             </div>
           </div>
         </div>

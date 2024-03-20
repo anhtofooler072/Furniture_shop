@@ -1,66 +1,146 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+import { FirebaseContext } from "../contexts/FirebaseProvider";
+import { addDoc, onSnapshot, query } from "firebase/firestore";
 
 export default function Checkout() {
+  let [detailbank, setDetailbank] = useState(false)
+  let [detailcash, setDetailCash] = useState(false)
+  let [data, setData] = useState([])
+  let storage = JSON.parse(localStorage.getItem('yourcart'))
+
+  let { values, handleSubmit, handleChange, setFieldValue, touched, errors} = useFormik({
+    initialValues: {
+      customer: '',
+      id: '',
+      firstname: '',
+      lastname: '',
+      company: '',
+      house: '',
+      apartment: '',
+      state: '',
+      country: '',
+      towncity: '',
+      note: '',
+      zip: '',
+      bank:'',
+      phone:'',
+      date: new Date().toLocaleDateString()
+    }, onSubmit: async (values) => {
+      console.log(values)
+      console.log(storage)
+      await addDoc(messCustomer, { costumer: values, cart: storage });
+      localStorage.removeItem('yourcart')
+    },
+    validationSchema: Yup.object({
+      firstname: Yup.string().required().min(2),
+      lastname: Yup.string().required().min(2),
+      house: Yup.string().required().min(2),
+      towncity: Yup.string().required()
+    })
+  })
+
+  const { messCustomer } = useContext(FirebaseContext)
+  useEffect(() => {
+    const q = query(messCustomer);
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const temp = [];
+      querySnapshot.forEach((doc) => {
+        temp.push({ ...doc.data(), id: doc.id });
+      });
+      setData(temp)
+    });
+  }, [])
+
+  let showdetail = ((type) => {
+    if (type == 'bank') {
+      setDetailbank(true)
+      setDetailCash(false)
+      setFieldValue('bank',true)
+    } else {
+      setDetailbank(false)
+      setDetailCash(true)
+      setFieldValue('bank',false)
+    }
+  })
   return (
     <div>
       <div className="aboutUs_Header">
         <div className="TitleBox">
           <h3>Check out</h3>
         </div>
-        <form>
-          <div className="checkout_form">
-            <div className="checkout_info">
-              <label htmlFor="name">Name:</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-              />
+        <div className="checkout-container">
+          <form onSubmit={handleSubmit}>
+            <div className="checkout_form">
+              <div className="checkout_info">
+                <p className="tag-name">Customer information</p>
+                <input type="email" onChange={handleChange} id="customer" placeholder="Email Address" value={values.customer} />
+              </div>
+              <div className="checkout_info">
+                <p className="tag-name">Billing details</p>
+                <div className="type-section">
+                  <input type="text" onChange={handleChange} placeholder="First Name" id="firstname" value={values.firstname} />
+                  <input type="text" onChange={handleChange} placeholder="Last Name" id="lastname" value={values.lastname} />
+                </div>
+                <div className="type-section">
+                  {touched.firstname && <p className="error">{errors.firstname}</p>}
+                  {touched.lastname && <p className="error">{errors.lastname}</p>}
+                </div>
+                <input type="text" onChange={handleChange} placeholder="Company Name" id="company" value={values.company} />
+                <select value={values.country} onChange={handleChange} id="country">
+                  <option value="">Select your country</option>
+                  <option value="Mexico">Mexico</option>
+                  <option value="Iceland">Iceland</option>
+                  <option value="South Korea">South Korea</option>
+                  <option value="Samoa">Samoa</option>
+                  <option value="Poland">Poland</option>
+                  <option value="Samoa">Samoa</option>
+                  <option value="Peru">Peru</option>
+                  <option value="Norway">Norway</option>
+                  <option value="Niger">Niger</option>
+                  <option value="New Zealand">New Zealand</option>
+                  <option value="Vietnam">Vietnam</option>
+                  <option value="Tokyo">Tokyo</option>
+                  <option value="Thailand">Thailand</option>
+                </select>
+
+                <div className="type-section">
+                  <input type="text" onChange={handleChange} id="house" placeholder="House number and street name" value={values.house} />
+                  <input type="text" onChange={handleChange} id="apartment" placeholder="Apartment, suite, unit, etc..." value={values.apartment} />
+                </div>
+                <div className="type-section address">
+                  <input type="text" onChange={handleChange} id="towncity" placeholder="Town / City" />
+                  <select type="text" value={values.state} onChange={handleChange} id="state">
+                    <option value="">State</option>
+                    <option value="Midway Atoll">Midway Atoll</option>
+                    <option value="Wake Island">Wake Island</option>
+                    <option value="Baker Island">Baker Island</option>
+                    <option value="Johnston Atoll">Johnston Atoll</option>
+                    <option value="Navassa">Navassa</option>
+                  </select>
+                  <input type="number" onChange={handleChange} id="zip" placeholder="Postcode / Zip" value={values.zip} />
+                </div>
+                <input type="tel" onChange={handleChange} id="phone" placeholder="Phone" value={values.phone} required/>
+              </div>
+              <div className="checkout_info">
+                <p className="tag-name">Additional information</p>
+                <input type="text" onChange={handleChange} id="note" placeholder="Note about your order, e.g. special notes for delivery" value={values.note} />
+              </div>
+              <div className="checkout_info bank-section">
+                <label className="tag-name">Payment</label>
+                <label className="type-bank"><input type="radio" name="pay-type" id="pay-type" onChange={() => showdetail('bank')}/><span>Direct bank transfer</span></label>
+                {detailbank && <p className="detail-payment">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>}
+                <label className="type-bank"><input type="radio" name="pay-type" id="pay-type" onChange={() => showdetail('cash')}/><span>Cash on delivery</span></label>
+                {detailcash && <p className="detail-payment">Pay with cash upon delivery.</p>}
+              </div>
+              <button type="submit" className="button_submit">Place Order</button>
             </div>
-            <div className="checkout_info">
-              <label htmlFor="email">Email:</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-              />
-            </div>
-            <div className="checkout_info">
-              <label htmlFor="address">Address:</label>
-              <input
-                type="text"
-                id="address"
-                name="address"
-                required
-              />
-            </div>
-            <div className="checkout_info">
-              <label htmlFor="city">City:</label>
-              <input
-                type="text"
-                id="city"
-                name="city"
-                required
-              />
-            </div>
-            <div className="checkout_info">
-              <label htmlFor="zip">Zip:</label>
-              <input
-                type="text"
-                id="zip"
-                name="zip"
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              className="button_submit">
-              Place Order
-            </button>
+          </form>
+          <div className="your-order">
+
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

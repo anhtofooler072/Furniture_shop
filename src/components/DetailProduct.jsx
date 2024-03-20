@@ -26,7 +26,7 @@ export default function DetailProduct() {
   let singledoc = doc(messItem, param.id)
   let [data, setData] = useState(null)
 
-  let { values, handleSubmit, handleChange, setFieldValue,touched,errors } = useFormik({
+  let { values, handleSubmit, handleChange, setFieldValue, touched, errors } = useFormik({
     initialValues: {
       name: '',
       email: '',
@@ -35,20 +35,18 @@ export default function DetailProduct() {
     }, onSubmit: (values) => {
       data.reviewComment.push(values)
       updateItem(param.id, data)
-      setclickSubmit(true)
     },
     validationSchema: Yup.object({
       name: Yup.string().required().min(2),
       email: Yup.string().required().email().matches(/@gmail\.com$/, 'Email must be a valid Gmail address'),
-      review:Yup.string().required().min(2)
+      review: Yup.string().required().min(2)
     })
   })
-  let [clickSubmit, setclickSubmit] = [false]
   const updateItem = async (id, obj) => {
-    // Sử dụng hàm updateDoc để cập nhật dữ liệu
     await updateDoc(doc(messItem, id), obj);
   }
 
+  // lấy 1 data
   useEffect(() => {
     let getmess = async () => {
       const data = await getDoc(singledoc)
@@ -58,6 +56,7 @@ export default function DetailProduct() {
     getmess()
   }, [])
 
+  // lấy hết data
   useEffect(() => {
     const q = query(messItem);
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -95,7 +94,9 @@ export default function DetailProduct() {
   }
 
   let [colorImg, setColorImg] = useState('')
-  let changeColor = (color) => {
+  let [colorCode, setColorCode] = useState(data?.productColor[0].colorCode)
+  let changeColor = (color, colorcode) => {
+    setColorCode(colorcode)
     setColorImg(color)
   }
 
@@ -112,41 +113,72 @@ export default function DetailProduct() {
     return e.target.value
   }
 
-  const renderRelated = useMemo(() => {
-    if (!clickSubmit) {
-      let related = []
-      let randomNumber = 0
-      let i = 0
-      do {
-        randomNumber = Math.floor(Math.random() * allData.length)
-        if (allData[randomNumber]) {
-          related.push(allData[randomNumber]);
-        }
-        i++
-      } while (i < 4)
-      return related.map((it,index) => {
-        let checkStock = 'Sale!'
-        if (it?.stock == 'out of stock') {
-          checkStock = 'Out of stock'
-        }
-        
-        return (
-          <div className="item" key={index}>
-            <img src={it?.img[0]} alt="item" />
-            <p className='sale'>{checkStock}</p>
-            <div className="button-section">
-              <i><PiBasket /></i>
-              <i onClick={() => {
-                navigate('/productdetail/' + it?.id)
-                window.location.reload()
-              }}><FaEye /></i>
-            </div>
-            <p className="item-name">{it?.productName}</p>
-            <p className="item-price">${it?.price}</p>
-          </div>)
-      })
+  let renderSale = () => {
+    let checkStock = 'Sale!'
+    if (data?.stock == 'out of stock') {
+      checkStock = 'Out of stock'
     }
-  }, [clickSubmit, allData])
+    return <p className="sale">{checkStock}</p>
+  }
+
+  let addtoCart = () => {
+    if (data.stock == 'out of stock') {
+      alert('hết hàng')
+    } else {
+      let cartstorage = []
+      if (localStorage.getItem('yourcart') !== null) {
+        cartstorage = JSON.parse(localStorage.getItem('yourcart'))
+      }
+      let yourcart = {
+        id: param.id,
+        amount: count,
+        color: colorCode
+      }
+      let findcart = cartstorage.findIndex((it) => {
+        return it.id == yourcart.id
+      })
+      if (findcart > -1) {
+        cartstorage[findcart].amount += yourcart.amount
+      } else {
+        cartstorage.push(yourcart)
+      }
+      localStorage.setItem('yourcart', JSON.stringify(cartstorage))
+    }
+  }
+  const renderRelated = useMemo(() => {
+    let related = []
+    let randomNumber = 0
+    let i = 0
+    do {
+      randomNumber = Math.floor(Math.random() * allData.length)
+      if (allData[randomNumber]) {
+        related.push(allData[randomNumber]);
+      }
+      i++
+    } while (i < 4)
+    return related.map((it, index) => {
+      let checkStock = 'Sale!'
+      if (it?.stock == 'out of stock') {
+        checkStock = 'Out of stock'
+      }
+
+      return (
+        <div className="item" key={index}>
+          <img src={it?.img[0]} alt="item" />
+          <p className='sale'>{checkStock}</p>
+          <div className="button-section">
+            <i onClick={addtoCart}><PiBasket /></i>
+            <i onClick={() => {
+              navigate('/productdetail/' + it?.id)
+              window.location.reload()
+            }}><FaEye /></i>
+          </div>
+          <p className="item-name">{it?.productName}</p>
+          <p className="item-price">${it?.price}</p>
+        </div>)
+    })
+
+  }, [allData])
 
 
   let [star, setStar] = useState(0)
@@ -164,8 +196,8 @@ export default function DetailProduct() {
     newReviewComments.splice(indexToDelete, 1);
     await updateDoc(singledoc, { reviewComment: newReviewComments });
     setData(prevData => ({
-        ...prevData,
-        reviewComment: newReviewComments
+      ...prevData,
+      reviewComment: newReviewComments
     }));
   }
 
@@ -177,7 +209,7 @@ export default function DetailProduct() {
         <p className='no-review'>There are no reviews yet.</p>
       )
     } else if ((data?.reviewComment.length) > 0) {
-      return data?.reviewComment.map((it,index) => {
+      return data?.reviewComment.map((it, index) => {
         let star = []
         for (let i = 0; i < it.rating; i++) {
           star.push(<FaStar />)
@@ -189,8 +221,8 @@ export default function DetailProduct() {
         }
         let mail = it.email.slice(0, 2)
         return (
-          <div className="user-comment">
-            <button onClick={() => {deleteComment(index)}} className="delete-comment">X</button>
+          <div className="user-comment" key={index}>
+            <button onClick={() => { deleteComment(index) }} className="delete-comment">X</button>
             <span className="comment-name">{it.name}</span>
             <span className='comment-mail'>{mail}...@mail.com</span>
             <span className='comment-rating'>{star}</span>
@@ -210,6 +242,7 @@ export default function DetailProduct() {
         <div className="detail-section">
           <div className="product-img">
             <img src={colorImg} alt="item" />
+            {renderSale()}
             <div className="another-img">
               <img src={data?.img[1]} alt="item" />
               <img src={data?.img[2]} alt="item" />
@@ -218,10 +251,6 @@ export default function DetailProduct() {
           <div className="product-buy">
             <div className="header-detail">
               <p className="categories-header">Home / {data?.categories[0]} / {data?.productName}</p>
-              <div className="next-product-section">
-                <button><FaChevronLeft /></button>
-                <button><FaChevronRight /></button>
-              </div>
             </div>
             {renderCategories()}
             <p className='product-name'>{data?.productName}</p>
@@ -229,15 +258,15 @@ export default function DetailProduct() {
             <span className='free-ship'> & Free Shipping</span>
             <p className="product-description">{data?.description}</p>
             <div className="color-section">
-              <div className="match-color" style={{ backgroundColor: `${data?.productColor[0].colorCode}` }} onClick={() => changeColor(`${data?.img[0]}`)}></div>
-              <div className="match-color" style={{ backgroundColor: `${data?.productColor[1].colorCode}` }} onClick={() => changeColor(`${data?.img[1]}`)}></div>
-              <div className="match-color" style={{ backgroundColor: `${data?.productColor[2].colorCode}` }} onClick={() => changeColor(`${data?.img[2]}`)}></div>
+              <div className="match-color" style={{ backgroundColor: `${data?.productColor[0].colorCode}` }} onClick={() => changeColor(`${data?.img[0]}`, `${data?.productColor[0].colorCode}`)}></div>
+              <div className="match-color" style={{ backgroundColor: `${data?.productColor[1].colorCode}` }} onClick={() => changeColor(`${data?.img[1]}`, `${data?.productColor[1].colorCode}`)}></div>
+              <div className="match-color" style={{ backgroundColor: `${data?.productColor[2].colorCode}` }} onClick={() => changeColor(`${data?.img[2]}`, `${data?.productColor[2].colorCode}`)}></div>
             </div>
             <div className="add-cart-section">
               <button onClick={() => countCart('minius')}>-</button>
               <input type="text" value={count} onChange={handleChangeValue} />
               <button onClick={() => countCart('plus')}>+</button>
-              <button className='addtocart'>ADD TO CART</button>
+              <button className='addtocart' onClick={addtoCart}>ADD TO CART</button>
             </div>
             <div className="product-meta">
               <span>SKU: N/A</span>
@@ -365,18 +394,18 @@ export default function DetailProduct() {
                 <div className="review-comment">
                   <form onSubmit={handleSubmit}>
                     <label htmlFor="your-review">Your Review *</label>
-                    <textarea id='review' className='your-review-input' cols={1} name="review" onChange={handleChange} value={values.review} />
-                    {touched.review && <p className="error">* {errors.review}</p>} 
+                    <textarea id='review' className='your-review-input' cols={1} onChange={handleChange} value={values.review} />
+                    {touched.review && <p className="error">* {errors.review}</p>}
                     <div className="your-information">
                       <div className="your-name-section">
                         <label htmlFor="your-name">Your Name *</label>
                         <input type="text" id='name' onChange={handleChange} value={values.name} />
-                        {touched.name && <p className="error">* {errors.name}</p>} 
+                        {touched.name && <p className="error">* {errors.name}</p>}
                       </div>
                       <div className="your-email-section">
                         <label htmlFor="your-email">Your Email *</label>
                         <input type="text" id='email' onChange={handleChange} value={values.email} />
-                        {touched.email && <p className="error">* {errors.email}</p>} 
+                        {touched.email && <p className="error">* {errors.email}</p>}
                       </div>
                     </div>
                     <span>Save my name, email, and website in this browser for the next time I comment.</span>

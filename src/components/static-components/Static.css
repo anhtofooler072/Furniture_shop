@@ -39,6 +39,9 @@ body {
 }
 
 a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 20px;
   padding: 0 20px 0 0;
   text-decoration: none;

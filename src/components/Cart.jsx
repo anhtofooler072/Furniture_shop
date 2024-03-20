@@ -65,6 +65,7 @@ export default function Cart() {
       setTotal(subtotal + ship())
     }
   }, [subtotal])
+  
   let ship=(()=>{
     if(subtotal>0){
       return 25
@@ -83,7 +84,7 @@ export default function Cart() {
             <div className="nametag-cart">
               <p className="product">Product</p>
               <p className="price">Price</p>
-              <p className="quanlity">Quantity</p>
+              <p className="quanlity">Quanlity</p>
               <div className="subtotal">Subtotal</div>
             </div>
             {rendercart()}

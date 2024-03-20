@@ -35,7 +35,6 @@ export default function DetailProduct() {
     }, onSubmit: (values) => {
       data.reviewComment.push(values)
       updateItem(param.id, data)
-      setclickSubmit(true)
     },
     validationSchema: Yup.object({
       name: Yup.string().required().min(2),
@@ -43,12 +42,10 @@ export default function DetailProduct() {
       review: Yup.string().required().min(2)
     })
   })
-  let [clickSubmit, setclickSubmit] = [false]
   const updateItem = async (id, obj) => {
-    // Sử dụng hàm updateDoc để cập nhật dữ liệu
     await updateDoc(doc(messItem, id), obj);
   }
-  
+
   // lấy 1 data
   useEffect(() => {
     let getmess = async () => {
@@ -97,7 +94,9 @@ export default function DetailProduct() {
   }
 
   let [colorImg, setColorImg] = useState('')
-  let changeColor = (color) => {
+  let [colorCode, setColorCode] = useState(data?.productColor[0].colorCode)
+  let changeColor = (color, colorcode) => {
+    setColorCode(colorcode)
     setColorImg(color)
   }
 
@@ -121,6 +120,7 @@ export default function DetailProduct() {
     }
     return <p className="sale">{checkStock}</p>
   }
+
   let addtoCart = () => {
     if (data.stock == 'out of stock') {
       alert('hết hàng')
@@ -131,8 +131,8 @@ export default function DetailProduct() {
       }
       let yourcart = {
         id: param.id,
-        img: colorImg,
-        amount: count
+        amount: count,
+        color: colorCode
       }
       let findcart = cartstorage.findIndex((it) => {
         return it.id == yourcart.id
@@ -146,40 +146,39 @@ export default function DetailProduct() {
     }
   }
   const renderRelated = useMemo(() => {
-    if (!clickSubmit) {
-      let related = []
-      let randomNumber = 0
-      let i = 0
-      do {
-        randomNumber = Math.floor(Math.random() * allData.length)
-        if (allData[randomNumber]) {
-          related.push(allData[randomNumber]);
-        }
-        i++
-      } while (i < 4)
-      return related.map((it, index) => {
-        let checkStock = 'Sale!'
-        if (it?.stock == 'out of stock') {
-          checkStock = 'Out of stock'
-        }
+    let related = []
+    let randomNumber = 0
+    let i = 0
+    do {
+      randomNumber = Math.floor(Math.random() * allData.length)
+      if (allData[randomNumber]) {
+        related.push(allData[randomNumber]);
+      }
+      i++
+    } while (i < 4)
+    return related.map((it, index) => {
+      let checkStock = 'Sale!'
+      if (it?.stock == 'out of stock') {
+        checkStock = 'Out of stock'
+      }
 
-        return (
-          <div className="item" key={index}>
-            <img src={it?.img[0]} alt="item" />
-            <p className='sale'>{checkStock}</p>
-            <div className="button-section">
-              <i onClick={addtoCart}><PiBasket/></i>
-              <i onClick={() => {
-                navigate('/productdetail/' + it?.id)
-                window.location.reload()
-              }}><FaEye /></i>
-            </div>
-            <p className="item-name">{it?.productName}</p>
-            <p className="item-price">${it?.price}</p>
-          </div>)
-      })
-    }
-  }, [clickSubmit, allData])
+      return (
+        <div className="item" key={index}>
+          <img src={it?.img[0]} alt="item" />
+          <p className='sale'>{checkStock}</p>
+          <div className="button-section">
+            <i onClick={addtoCart}><PiBasket /></i>
+            <i onClick={() => {
+              navigate('/productdetail/' + it?.id)
+              window.location.reload()
+            }}><FaEye /></i>
+          </div>
+          <p className="item-name">{it?.productName}</p>
+          <p className="item-price">${it?.price}</p>
+        </div>)
+    })
+
+  }, [allData])
 
 
   let [star, setStar] = useState(0)
@@ -202,7 +201,7 @@ export default function DetailProduct() {
     }));
   }
 
-  
+
 
   let renderReview = () => {
     if ((data?.reviewComment.length) == 0) {
@@ -222,7 +221,7 @@ export default function DetailProduct() {
         }
         let mail = it.email.slice(0, 2)
         return (
-          <div className="user-comment">
+          <div className="user-comment" key={index}>
             <button onClick={() => { deleteComment(index) }} className="delete-comment">X</button>
             <span className="comment-name">{it.name}</span>
             <span className='comment-mail'>{mail}...@mail.com</span>
@@ -242,7 +241,7 @@ export default function DetailProduct() {
 
         <div className="detail-section">
           <div className="product-img">
-            <img src={colorImg} alt="item"/>
+            <img src={colorImg} alt="item" />
             {renderSale()}
             <div className="another-img">
               <img src={data?.img[1]} alt="item" />
@@ -259,9 +258,9 @@ export default function DetailProduct() {
             <span className='free-ship'> & Free Shipping</span>
             <p className="product-description">{data?.description}</p>
             <div className="color-section">
-              <div className="match-color" style={{ backgroundColor: `${data?.productColor[0].colorCode}` }} onClick={() => changeColor(`${data?.img[0]}`)}></div>
-              <div className="match-color" style={{ backgroundColor: `${data?.productColor[1].colorCode}` }} onClick={() => changeColor(`${data?.img[1]}`)}></div>
-              <div className="match-color" style={{ backgroundColor: `${data?.productColor[2].colorCode}` }} onClick={() => changeColor(`${data?.img[2]}`)}></div>
+              <div className="match-color" style={{ backgroundColor: `${data?.productColor[0].colorCode}` }} onClick={() => changeColor(`${data?.img[0]}`, `${data?.productColor[0].colorCode}`)}></div>
+              <div className="match-color" style={{ backgroundColor: `${data?.productColor[1].colorCode}` }} onClick={() => changeColor(`${data?.img[1]}`, `${data?.productColor[1].colorCode}`)}></div>
+              <div className="match-color" style={{ backgroundColor: `${data?.productColor[2].colorCode}` }} onClick={() => changeColor(`${data?.img[2]}`, `${data?.productColor[2].colorCode}`)}></div>
             </div>
             <div className="add-cart-section">
               <button onClick={() => countCart('minius')}>-</button>
@@ -395,7 +394,7 @@ export default function DetailProduct() {
                 <div className="review-comment">
                   <form onSubmit={handleSubmit}>
                     <label htmlFor="your-review">Your Review *</label>
-                    <textarea id='review' className='your-review-input' cols={1} name="review" onChange={handleChange} value={values.review} />
+                    <textarea id='review' className='your-review-input' cols={1} onChange={handleChange} value={values.review} />
                     {touched.review && <p className="error">* {errors.review}</p>}
                     <div className="your-information">
                       <div className="your-name-section">

@@ -484,6 +484,51 @@ h6 {
   border-bottom: solid 1px #36363666;
   transition: all 0.3s ease-in-out;
 }
+/**--------------------------------------------
+ *               LOGIN SECTION
+ *---------------------------------------------**/
+ .login_section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 100px 0;
+  background-color: #f5f5f5;
+  width: 500px;
+}
+.login_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+.login_box_input {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+.login_box_input input {
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 16px;
+  font-family: "Oswald", sans-serif;
+}
+.login_box_button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 20px;
+}
 /*============================ END OF SECTION ============================*/
 
 /**========================================================================
@@ -1364,20 +1409,20 @@ h6 {
 /**----------------------
  *    SECTION CHECKOUT
  *------------------------**/
-.checkout-container {
+ .checkout-container {
   width: 1380px;
   display: flex;
   justify-content: space-between;
 }
+
 .checkout-container form {
   width: 50%;
 }
+
 .checkout-container form button {
   width: 100%;
 }
-.checkout-container .your-order {
-  width: 50%;
-}
+
 .checkout_form {
   display: flex;
   justify-content: center;
@@ -1388,6 +1433,7 @@ h6 {
   margin: 50px 0;
   background-color: #f5f5f5;
 }
+
 .checkout_info {
   display: flex;
   justify-content: flex-start;
@@ -1395,11 +1441,14 @@ h6 {
   flex-direction: column;
   width: 100%;
 }
-.checkout_form .tag-name {
+
+.checkout_form .tag-name,
+.your-order .tag-name {
   margin-bottom: 12px;
   font-size: 23px;
   font-weight: bold;
 }
+
 .checkout_info input {
   padding: 15px 20px;
   margin-bottom: 20px;
@@ -1411,25 +1460,35 @@ h6 {
   font-family: "Oswald", sans-serif;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
+
 .checkout_info .type-section {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
+
 .checkout_info .type-section .error {
   color: red;
   width: 49%;
   margin-bottom: 20px;
 }
+
 .checkout_info .type-section input {
   width: 49%;
 }
+
 .checkout_info .address input {
   width: 32%;
 }
+
+.checkout_info .address .error {
+  width: 32%;
+}
+
 .checkout_info .address select {
   width: 32%;
 }
+
 .checkout_info select {
   padding: 15px 20px;
   margin-bottom: 20px;
@@ -1440,6 +1499,7 @@ h6 {
   font-size: 16px;
   font-family: "Oswald", sans-serif;
 }
+
 .bank-section .type-bank {
   display: flex;
   align-items: center;
@@ -1455,13 +1515,16 @@ h6 {
   background-color: white;
   margin-top: 15px;
 }
+
 .bank-section .type-bank input {
   width: 20px;
   margin: 0;
 }
+
 .bank-section .type-bank span {
   margin-left: 10px;
 }
+
 .bank-section .detail-payment {
   font-size: 14px;
   padding: 12px 16px;
@@ -1470,5 +1533,85 @@ h6 {
   border-bottom-left-radius: 70px;
   border-bottom-right-radius: 10px;
   text-align: center;
+}
+
+.checkout-container .your-order {
+  width: 40%;
+  margin: 50px 0;
+}
+
+.your-order table {
+  border-radius: 10px;
+  width: 100%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+.your-order table thead th {
+  font-weight: unset;
+  text-align: left;
+}
+
+.your-order table .product-name {
+  padding: 10px 20px;
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  font-weight: unset;
+  text-align: left;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.your-order table .product-name img {
+  width: 80px;
+  height: 80px;
+  background-color: #4d4d4d;
+  margin-right: 20px;
+}
+
+.your-order .product-price {
+  padding: 0 20px;
+  text-align: right;
+  width: 30%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  font-weight: unset;
+}
+
+.your-order thead .product-name-tag {
+  font-size: 18px;
+  text-decoration: underline;
+}
+
+.your-order .subtotal-name {
+  padding: 10px 20px;
+  width: 60%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  text-align: left;
+}
+
+.your-order .subtotal-price {
+  padding: 0 20px;
+  text-align: right;
+  width: 30%;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.your-order .total-name {
+  padding: 10px 20px;
+  width: 60%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  text-align: left;
+  font-size: 20px;
+}
+
+.your-order .total-price {
+  padding: 0 20px;
+  text-align: right;
+  width: 30%;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  font-size: 20px;
 }
 /*============================ END OF SECTION ============================*/

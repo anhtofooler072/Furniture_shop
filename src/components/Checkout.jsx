@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { FirebaseContext } from "../contexts/FirebaseProvider";
@@ -8,9 +8,11 @@ export default function Checkout() {
   let [detailbank, setDetailbank] = useState(false)
   let [detailcash, setDetailCash] = useState(false)
   let [data, setData] = useState([])
-  let storage = JSON.parse(localStorage.getItem('yourcart'))
-
-  let { values, handleSubmit, handleChange, setFieldValue, touched, errors} = useFormik({
+  let storage = []
+  if (localStorage.getItem('yourcart') !== null) {
+    storage = JSON.parse(localStorage.getItem('yourcart'))
+  }
+  let { values, handleSubmit, handleChange, setFieldValue, touched, errors } = useFormik({
     initialValues: {
       customer: '',
       id: '',
@@ -24,26 +26,38 @@ export default function Checkout() {
       towncity: '',
       note: '',
       zip: '',
-      bank:'',
-      phone:'',
+      bank: '',
+      phone: '',
       date: new Date().toLocaleDateString()
     }, onSubmit: async (values) => {
-      console.log(values)
-      console.log(storage)
-      await addDoc(messCustomer, { costumer: values, cart: storage });
-      localStorage.removeItem('yourcart')
+      if (storage.length > 0) {
+        await addDoc(messCustomer, { costumer: values, cart: storage });
+        localStorage.removeItem('yourcart')
+      }
     },
     validationSchema: Yup.object({
-      firstname: Yup.string().required().min(2),
-      lastname: Yup.string().required().min(2),
-      house: Yup.string().required().min(2),
-      towncity: Yup.string().required()
+      firstname: Yup.string().required("* firstname is a required field").min(2),
+      lastname: Yup.string().required("* lastname is a required field").min(2),
+      house: Yup.string().required("* housename is a required field").min(4),
+      towncity: Yup.string().required("* towncity is a required field").min(2),
+      zip: Yup.number().required("* zip is a required field").min(2)
     })
   })
 
   const { messCustomer } = useContext(FirebaseContext)
+  // useEffect(() => {
+  //   const q = query(messCustomer);
+  //   const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  //     const temp = [];
+  //     querySnapshot.forEach((doc) => {
+  //       temp.push({ ...doc.data(), id: doc.id });
+  //     });
+  //     setData(temp)
+  //   });
+  // }, [])
+  const { messItem } = useContext(FirebaseContext)
   useEffect(() => {
-    const q = query(messCustomer);
+    const q = query(messItem);
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const temp = [];
       querySnapshot.forEach((doc) => {
@@ -57,12 +71,52 @@ export default function Checkout() {
     if (type == 'bank') {
       setDetailbank(true)
       setDetailCash(false)
-      setFieldValue('bank',true)
+      setFieldValue('bank', true)
     } else {
       setDetailbank(false)
       setDetailCash(true)
-      setFieldValue('bank',false)
+      setFieldValue('bank', false)
     }
+  })
+
+  let renderProduct = (() => {
+    if (storage.length > 0) {
+      return storage.map((it) => {
+        let findIndex=data.findIndex((product)=>{
+          return it?.id==product?.id
+        })
+        let productdata=data[findIndex]
+        let findColor=productdata?.productColor.findIndex((product)=>{
+          return product?.colorCode==it?.color
+        })
+        let totalprice=(productdata?.price * it?.amount)
+        return (
+          <tr key={it?.id}>
+            <td className="product-name"><img src={productdata?.img[findColor]} alt="product" /><span>{productdata?.productName}</span></td>
+            <td className="product-price">${totalprice} x {it?.amount}</td>
+          </tr>
+        )
+      })
+    }
+  })
+
+  let rendersubtotal= (()=>{
+    if (storage !== null) {
+      let allsubtotal = 0
+      let subtotal = 0
+      storage.map((product) => {
+        let findIndex = data.findIndex((it) => {
+          return it.id == product.id
+        })
+        let dataProduct = data[findIndex]
+        subtotal = dataProduct?.price * product?.amount
+        allsubtotal += subtotal
+      })
+      return allsubtotal
+    }
+  })
+  let rendertotal=(()=>{
+    return rendersubtotal()+20
   })
   return (
     <div>
@@ -104,10 +158,12 @@ export default function Checkout() {
                   <option value="Tokyo">Tokyo</option>
                   <option value="Thailand">Thailand</option>
                 </select>
-
                 <div className="type-section">
                   <input type="text" onChange={handleChange} id="house" placeholder="House number and street name" value={values.house} />
                   <input type="text" onChange={handleChange} id="apartment" placeholder="Apartment, suite, unit, etc..." value={values.apartment} />
+                </div>
+                <div className="type-section">
+                  {touched.house && <p className="error">{errors.house}</p>}
                 </div>
                 <div className="type-section address">
                   <input type="text" onChange={handleChange} id="towncity" placeholder="Town / City" />
@@ -121,7 +177,11 @@ export default function Checkout() {
                   </select>
                   <input type="number" onChange={handleChange} id="zip" placeholder="Postcode / Zip" value={values.zip} />
                 </div>
-                <input type="tel" onChange={handleChange} id="phone" placeholder="Phone" value={values.phone} required/>
+                <div className="type-section address">
+                  {touched.towncity && <p className="error">{errors.towncity}</p>}
+                  {touched.zip && <p className="error">{errors.zip}</p>}
+                </div>
+                <input type="tel" onChange={handleChange} id="phone" placeholder="Phone" value={values.phone} required />
               </div>
               <div className="checkout_info">
                 <p className="tag-name">Additional information</p>
@@ -129,16 +189,37 @@ export default function Checkout() {
               </div>
               <div className="checkout_info bank-section">
                 <label className="tag-name">Payment</label>
-                <label className="type-bank"><input type="radio" name="pay-type" id="pay-type" onChange={() => showdetail('bank')}/><span>Direct bank transfer</span></label>
+                <label className="type-bank"><input type="radio" name="pay-type" id="pay-type" onChange={() => showdetail('bank')} /><span>Direct bank transfer</span></label>
                 {detailbank && <p className="detail-payment">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>}
-                <label className="type-bank"><input type="radio" name="pay-type" id="pay-type" onChange={() => showdetail('cash')}/><span>Cash on delivery</span></label>
+                <label className="type-bank"><input type="radio" name="pay-type" id="pay-type" onChange={() => showdetail('cash')} /><span>Cash on delivery</span></label>
                 {detailcash && <p className="detail-payment">Pay with cash upon delivery.</p>}
               </div>
               <button type="submit" className="button_submit">Place Order</button>
             </div>
           </form>
           <div className="your-order">
-
+            <p className="tag-name">Your order</p>
+            <table cellSpacing={0}>
+              <thead>
+                <tr>
+                  <th className="product-name product-name-tag">Product</th>
+                  <th className="product-price product-name-tag">Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                {renderProduct()}
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th className="subtotal-name">Subtotal</th>
+                  <th className="subtotal-price">+ $20 | ${rendersubtotal()}</th>
+                </tr>
+                <tr>
+                  <th className="total-name">Total</th>
+                  <th className="total-price">${rendertotal()}</th>
+                </tr>
+              </tfoot>
+            </table>
           </div>
         </div>
       </div>

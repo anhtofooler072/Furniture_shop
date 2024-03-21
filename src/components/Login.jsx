@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useContext } from "react";
 import { FirebaseContext } from "../contexts/FirebaseProvider";
 import { signInWithPopup, getAuth } from "firebase/auth";
+import { onSnapshot, query } from "firebase/firestore";
 
 export default function Login() {
   const auth = getAuth();
@@ -19,13 +20,83 @@ export default function Login() {
           user_id: result.user.uid,
         };
         localStorage.setItem("user", JSON.stringify(userInfo));
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);
       });
   };
+  let checklogin = localStorage.getItem("user");
+  console.log(localStorage.getItem("user"));
 
-  return (
+  // data from firebase
+  let [data, setData] = useState([]);
+  const { messItem } = useContext(FirebaseContext);
+
+  useEffect(() => {
+    const q = query(messItem);
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const temp = [];
+      querySnapshot.forEach((doc) => {
+        temp.push({ ...doc.data(), id: doc.id });
+      });
+      setData(temp);
+    });
+  }, []);
+
+  // order list
+  let orderList = [];
+  if (localStorage.getItem("orderPlaced")) {
+    orderList = JSON.parse(localStorage.getItem("orderPlaced"));
+  }
+
+  let renderOrderList = () => {
+    return orderList.map((order) => {
+      let totalPayment = 0;
+      return (
+        <div
+          key={order.orderId}
+          className="orderPlacedList">
+          <span>Order ID: {order.orderId}</span>
+          <br />
+          <div className="orderPlacedList_product">
+            {order.orderPlaced.map((product) => {
+              let findIndex = data.findIndex((it) => {
+                return it.id == product.id;
+              });
+              let dataProduct = data[findIndex];
+              let findColor = dataProduct?.productColor.findIndex((product) => {
+                return product?.color == product.color;
+              });
+              totalPayment += dataProduct?.price * product.amount;
+              return (
+                <div
+                  key={product.id}
+                  className="orderPlacedList_product_item">
+                  <div className="orderPlacedList_product_item_img">
+                    <img
+                      src={dataProduct?.img[findColor]}
+                      alt="product"
+                    />
+                    <p>{dataProduct?.productName}</p>
+                  </div>
+                  <div className="orderPlacedList_product_item_price">
+                    <p>Price: ${dataProduct?.price}</p>
+                    <p>Amount: {product.amount}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="orderPlaced_total">
+            <p>Total Payment: ${totalPayment}</p>
+          </div>
+        </div>
+      );
+    });
+  };
+
+  return checklogin == null ? (
     <div>
       <div className="aboutUs_Header">
         <div className="TitleBox">
@@ -58,6 +129,38 @@ export default function Login() {
             </button>
           </div>
         </div>
+      </div>
+    </div>
+  ) : (
+    <div>
+      <div className="aboutUs_Header">
+        <div className="TitleBox">
+          <img
+            src={JSON.parse(localStorage.getItem("user")).photo}
+            alt="user"
+            style={{
+              width: "100px",
+              height: "100px",
+              borderRadius: "50%",
+              border: "2.5px solid #d6d6d6",
+              marginBottom: "10px",
+            }}
+          />
+          <h3>Welcome {JSON.parse(localStorage.getItem("user")).name}</h3>
+        </div>
+        <div className="orderPlacedList_container">
+          <h4>Your Orders</h4>
+          <br />
+          {renderOrderList()}
+        </div>
+        <button
+          className="button_submit"
+          onClick={() => {
+            localStorage.removeItem("user");
+            window.location.reload();
+          }}>
+          Logout
+        </button>
       </div>
     </div>
   );

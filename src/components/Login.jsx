@@ -33,7 +33,9 @@ export default function Login() {
 
   // data from firebase
   let [data, setData] = useState([]);
+  let [dataCustomer, setDataCustomer] = useState([]);
   const { messItem } = useContext(FirebaseContext);
+  const { messCustomer } = useContext(FirebaseContext);
 
   useEffect(() => {
     const q = query(messItem);
@@ -46,20 +48,60 @@ export default function Login() {
     });
   }, []);
 
-  // order list
+  useEffect(() => {
+    const q = query(messCustomer);
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const temp = [];
+      querySnapshot.forEach((doc) => {
+        temp.push({ ...doc.data(), id: doc.id });
+      });
+      setDataCustomer(temp);
+    });
+  }, []);
+
   let orderList = [];
-  if (localStorage.getItem("orderPlaced")) {
-    orderList = JSON.parse(localStorage.getItem("orderPlaced"));
-  }
+  if (localStorage.getItem("user") !== null) {
+  dataCustomer.map((customerOrder) => {
+    if ( 
+      customerOrder.costumer.customer ==
+      JSON.parse(localStorage.getItem("user")).email
+    ) {
+      // console.log(customerOrder.costumer.customer);
+      // console.log(customerOrder.cart);
+      let order = {
+        orderDate: customerOrder.costumer.date,
+        orderPlaced: customerOrder.cart,
+      };
+      orderList.push(order);
+      console.log(orderList);
+    }
+  })
+};
 
   let renderOrderList = () => {
     return orderList.map((order) => {
+      if (order.orderPlaced.length == 0) {
+        return (
+          <div
+            key={order.orderDate + Math.random()}
+            className="orderPlacedList">
+            <span>Order date: {order.orderDate}</span>
+            <br />
+            <div className="orderPlacedList_product">
+              <p>No product in this order</p>
+            </div>
+            <div className="orderPlaced_total">
+              <p>Total Payment: $0</p>
+            </div>
+          </div>
+        );
+      }
       let totalPayment = 0;
       return (
         <div
-          key={order.orderId}
+          key={order.orderDate + Math.random()}
           className="orderPlacedList">
-          <span>Order ID: {order.orderId}</span>
+          <span>Order date: {order.orderDate}</span>
           <br />
           <div className="orderPlacedList_product">
             {order.orderPlaced.map((product) => {

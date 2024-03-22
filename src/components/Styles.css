@@ -315,7 +315,7 @@ h6 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 185px 0 0 0;
+  padding: 185px 0 85px 0;
   background-color: #f5f5f5;
 }
 .aboutUs_Inner {
@@ -487,7 +487,7 @@ h6 {
 /**--------------------------------------------
  *               LOGIN SECTION
  *---------------------------------------------**/
- .login_section {
+.login_section {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -528,6 +528,81 @@ h6 {
   flex-direction: row;
   width: 100%;
   margin-bottom: 20px;
+}
+/**----------------------
+ *    LOGGED IN SECTION
+ *------------------------**/
+.orderPlacedList_container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 75%;
+  margin: 50px 0;
+}
+.orderPlacedList {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px 35px;
+  margin-bottom: 50px;
+  border-radius: 10px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.082);
+  background-color: #ffffff;
+}
+.orderPlacedList_product {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  margin-top: 20px;
+  padding-bottom: 50px;
+  border-bottom: solid 2px #36363666;
+}
+.orderPlacedList_product_item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+}
+.orderPlacedList_product_item_img {
+  width: 60%;
+  height: 100px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+}
+.orderPlacedList_product_item_img img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+.orderPlacedList_product_item_price {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  padding-left: 180px;
+  width: 30%;
+}
+.orderPlaced_total {
+  margin: 30px 0 20px 0;
+  padding-left: 10px;
+}
+.orderPlaced_total p {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Oswald", sans-serif;
+  color: #393939;
 }
 /*============================ END OF SECTION ============================*/
 
@@ -1409,7 +1484,7 @@ h6 {
 /**----------------------
  *    SECTION CHECKOUT
  *------------------------**/
- .checkout-container {
+.checkout-container {
   width: 1380px;
   display: flex;
   justify-content: space-between;

@@ -9,8 +9,12 @@ export default function Checkout() {
   let [detailcash, setDetailCash] = useState(false)
   let [data, setData] = useState([])
   let storage = []
+  let ordered = []
   if (localStorage.getItem('yourcart') !== null) {
     storage = JSON.parse(localStorage.getItem('yourcart'))
+  }
+  if (localStorage.getItem('orderPlaced') !== null) {
+    ordered = JSON.parse(localStorage.getItem('orderPlaced'))
   }
   let { values, handleSubmit, handleChange, setFieldValue, touched, errors } = useFormik({
     initialValues: {
@@ -32,6 +36,10 @@ export default function Checkout() {
     }, onSubmit: async (values) => {
       if (storage.length > 0) {
         await addDoc(messCustomer, { costumer: values, cart: storage });
+        // MOVE TO ORDERED
+        ordered = [...ordered, { orderId: ordered.length + 1, orderPlaced: JSON.parse(localStorage.getItem('yourcart')) }]
+        localStorage.setItem('orderPlaced', JSON.stringify(ordered))
+        console.log(ordered)
         localStorage.removeItem('yourcart')
       }
     },
@@ -118,6 +126,20 @@ export default function Checkout() {
   let rendertotal=(()=>{
     return rendersubtotal()+20
   })
+
+
+
+  // check if there is user logged in to autofill the form
+  if (localStorage.getItem('user') !== null) {
+    let user = JSON.parse(localStorage.getItem('user'))
+    values.customer = user.email
+    values.firstname = user.firstname
+    values.lastname = user.lastname
+  }
+
+
+
+
   return (
     <div>
       <div className="aboutUs_Header">

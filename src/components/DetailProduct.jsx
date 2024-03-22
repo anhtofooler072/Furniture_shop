@@ -212,17 +212,17 @@ export default function DetailProduct() {
       return data?.reviewComment.map((it, index) => {
         let star = []
         for (let i = 0; i < it.rating; i++) {
-          star.push(<FaStar />)
+          star.push(<FaStar key={Math.random()*1000}/>)
         }
         if (star.length < 5) {
           for (let y = star.length; y < 5; y++) {
-            star.push(<CiStar />)
+            star.push(<CiStar key={Math.random()*1000}/>)
           }
         }
         let mail = it.email.slice(0, 2)
         return (
           <div className="user-comment" key={index}>
-            <button onClick={() => { deleteComment(index) }} className="delete-comment">X</button>
+            {/* <button onClick={() => { deleteComment(index) }} className="delete-comment">X</button> */}
             <span className="comment-name">{it.name}</span>
             <span className='comment-mail'>{mail}...@mail.com</span>
             <span className='comment-rating'>{star}</span>

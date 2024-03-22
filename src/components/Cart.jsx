@@ -105,13 +105,13 @@ export default function Cart() {
       });
   };
   const process_checkout = () => {
-    if (user) {
+    if (user && localStorage.getItem("yourcart") !== null){
       return (
         <NavLink to="/checkout">
           <button className="button_submit">Process to Checkout</button>
         </NavLink>
       );
-    } else {
+    } else if (localStorage.getItem("yourcart") !== null){
       return (
         <button
           onClick={signInWithGoogle}

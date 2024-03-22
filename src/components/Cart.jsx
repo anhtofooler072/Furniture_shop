@@ -91,6 +91,8 @@ export default function Cart() {
         // save  the user to the local storage
         let userInfo = {
           name: result.user.displayName,
+          firstname: result.user.displayName.split(" ")[0],
+          lastname: result.user.displayName.split(" ")[1],
           email: result.user.email,
           photo: result.user.photoURL,
           user_id: result.user.uid,

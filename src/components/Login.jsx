@@ -15,6 +15,8 @@ export default function Login() {
         // save  the user to the local storage
         let userInfo = {
           name: result.user.displayName,
+          firstname: result.user.displayName.split(" ")[0],
+          lastname: result.user.displayName.split(" ")[1],
           email: result.user.email,
           photo: result.user.photoURL,
           user_id: result.user.uid,
@@ -149,7 +151,7 @@ export default function Login() {
           <h3>Welcome {JSON.parse(localStorage.getItem("user")).name}</h3>
         </div>
         <div className="orderPlacedList_container">
-          <h4>Your Orders</h4>
+          <h4>Your Orders History</h4>
           <br />
           {renderOrderList()}
         </div>

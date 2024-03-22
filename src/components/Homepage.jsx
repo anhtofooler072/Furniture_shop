@@ -105,13 +105,28 @@ export default function Homepage() {
 
       <div className="partner">
         <Swiper
-          slidesPerView={6}
-          spaceBetween={30}
           centeredSlides={false}
           autoplay={{ delay: 2500, disableOnInteraction: false }}
           navigation={false}
           modules={[Autoplay, Pagination, Navigation]}
-          className="mySwiper">
+          className="mySwiper"
+          breakpoints={{
+            // for mobile
+            429: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            // for tablet
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 10,
+            },
+            // for desktop
+            1024: {
+              slidesPerView: 6,
+              spaceBetween: 10,
+            },
+          }}>
           <SwiperSlide>
             {" "}
             <svg

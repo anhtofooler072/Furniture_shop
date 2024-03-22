@@ -126,6 +126,20 @@ export default function Checkout() {
   let rendertotal=(()=>{
     return rendersubtotal()+20
   })
+
+
+
+  // check if there is user logged in to autofill the form
+  if (localStorage.getItem('user') !== null) {
+    let user = JSON.parse(localStorage.getItem('user'))
+    values.customer = user.email
+    values.firstname = user.firstname
+    values.lastname = user.lastname
+  }
+
+
+
+
   return (
     <div>
       <div className="aboutUs_Header">

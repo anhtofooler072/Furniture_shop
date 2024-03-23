@@ -37,9 +37,9 @@ export default function DetailProduct() {
       updateItem(param.id, data)
     },
     validationSchema: Yup.object({
-      name: Yup.string().required().min(2),
-      email: Yup.string().required().email().matches(/@gmail\.com$/, 'Email must be a valid Gmail address'),
-      review: Yup.string().required().min(2)
+      name: Yup.string().required('* Name is a required field').min(2),
+      email: Yup.string().required('* Email is a required field').email().matches(/@gmail\.com$/),
+      review: Yup.string().required('* Your Review is a required field').min(2)
     })
   })
   const updateItem = async (id, obj) => {
@@ -191,18 +191,6 @@ export default function DetailProduct() {
     return data?.reviewComment.length
   }
 
-  const deleteComment = async (indexToDelete) => {
-    const newReviewComments = [...data.reviewComment];
-    newReviewComments.splice(indexToDelete, 1);
-    await updateDoc(singledoc, { reviewComment: newReviewComments });
-    setData(prevData => ({
-      ...prevData,
-      reviewComment: newReviewComments
-    }));
-  }
-
-
-
   let renderReview = () => {
     if ((data?.reviewComment.length) == 0) {
       return (
@@ -222,7 +210,6 @@ export default function DetailProduct() {
         let mail = it.email.slice(0, 2)
         return (
           <div className="user-comment" key={index}>
-            {/* <button onClick={() => { deleteComment(index) }} className="delete-comment">X</button> */}
             <span className="comment-name">{it.name}</span>
             <span className='comment-mail'>{mail}...@mail.com</span>
             <span className='comment-rating'>{star}</span>
@@ -395,17 +382,17 @@ export default function DetailProduct() {
                   <form onSubmit={handleSubmit}>
                     <label htmlFor="your-review">Your Review *</label>
                     <textarea id='review' className='your-review-input' cols={1} onChange={handleChange} value={values.review} />
-                    {touched.review && <p className="error">* {errors.review}</p>}
+                    {touched.review && <p className="error">{errors.review}</p>}
                     <div className="your-information">
                       <div className="your-name-section">
                         <label htmlFor="your-name">Your Name *</label>
                         <input type="text" id='name' onChange={handleChange} value={values.name} />
-                        {touched.name && <p className="error">* {errors.name}</p>}
+                        {touched.name && <p className="error">{errors.name}</p>}
                       </div>
                       <div className="your-email-section">
                         <label htmlFor="your-email">Your Email *</label>
-                        <input type="text" id='email' onChange={handleChange} value={values.email} />
-                        {touched.email && <p className="error">* {errors.email}</p>}
+                        <input type="email" id='email' onChange={handleChange} value={values.email} />
+                        {touched.email && <p className="error">{errors.email}</p>}
                       </div>
                     </div>
                     <span>Save my name, email, and website in this browser for the next time I comment.</span>

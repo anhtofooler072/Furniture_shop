@@ -17,19 +17,21 @@ export default function Footer_components() {
             />
           </NavLink>
         </div>
-        <div className="footerCol">
-          <h4>Links</h4>
-          <NavLink to="/story">Our Story</NavLink>
-          <NavLink to="/contact">Contact</NavLink>
-          <NavLink to="/help">Help</NavLink>
-        </div>
-        <div className="footerCol">
-          <h4>Categories</h4>
-          <NavLink to="/shop_all">Shop All</NavLink>
-          <NavLink to="/decor">Decor</NavLink>
-          <NavLink to="/bedroom">Bedroom</NavLink>
-          <NavLink to="/living_room">Living Room</NavLink>
-          <NavLink to="/office">Office</NavLink>
+        <div className="flex-footer">
+          <div className="footerCol">
+            <h4>Links</h4>
+            <NavLink to="/story">Our Story</NavLink>
+            <NavLink to="/contact">Contact</NavLink>
+            <NavLink to="/help">Help</NavLink>
+          </div>
+          <div className="footerCol">
+            <h4>Categories</h4>
+            <NavLink to="/shop_all">Shop All</NavLink>
+            <NavLink to="/decor">Decor</NavLink>
+            <NavLink to="/bedroom">Bedroom</NavLink>
+            <NavLink to="/living_room">Living Room</NavLink>
+            <NavLink to="/office">Office</NavLink>
+          </div>
         </div>
         <div className="footerCol">
           <form action="">

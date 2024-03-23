@@ -19,7 +19,6 @@ export default function ProductItem(props) {
     let [colorCode, setColorCode] = useState(props.it.productColor[0].colorCode)
     const changeColor = (color,colorCode) => {
         setColorCode(colorCode)
-        console.log(colorCode)
         setImg(color)
     }
     let addtoCart = () => {

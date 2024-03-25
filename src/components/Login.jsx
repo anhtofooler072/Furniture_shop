@@ -61,22 +61,22 @@ export default function Login() {
 
   let orderList = [];
   if (localStorage.getItem("user") !== null) {
-  dataCustomer.map((customerOrder) => {
-    if ( 
-      customerOrder.costumer.customer ==
-      JSON.parse(localStorage.getItem("user")).email
-    ) {
-      // console.log(customerOrder.costumer.customer);
-      // console.log(customerOrder.cart);
-      let order = {
-        orderDate: customerOrder.costumer.date,
-        orderPlaced: customerOrder.cart,
-      };
-      orderList.push(order);
-      console.log(orderList);
-    }
-  })
-};
+    dataCustomer.map((customerOrder) => {
+      if (
+        customerOrder.costumer.customer ==
+        JSON.parse(localStorage.getItem("user")).email
+      ) {
+        // console.log(customerOrder.costumer.customer);
+        // console.log(customerOrder.cart);
+        let order = {
+          orderDate: customerOrder.costumer.date,
+          orderPlaced: customerOrder.cart,
+        };
+        orderList.push(order);
+        console.log(orderList);
+      }
+    });
+  }
 
   let renderOrderList = () => {
     return orderList.map((order) => {

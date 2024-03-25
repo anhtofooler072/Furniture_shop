@@ -53,15 +53,15 @@ export default function Navbar() {
           </div>
         </div>
         <div className={morenav}>
-          <NavLink to="/shop_all">Shop All</NavLink>
-          <NavLink to="/decor">Decor</NavLink>
-          <NavLink to="/bedroom">Bedroom</NavLink>
-          <NavLink to="/living_room">Living Room</NavLink>
-          <NavLink to="/office">Office</NavLink>
-          <NavLink to="/cart">
+          <NavLink onClick={active} to="/shop_all">Shop All</NavLink>
+          <NavLink onClick={active} to="/decor">Decor</NavLink>
+          <NavLink onClick={active} to="/bedroom">Bedroom</NavLink>
+          <NavLink onClick={active} to="/living_room">Living Room</NavLink>
+          <NavLink onClick={active} to="/office">Office</NavLink>
+          <NavLink onClick={active} to="/cart">
             <LuShoppingCart /> <span className="name-navbar">Your Cart</span>
           </NavLink>
-          <NavLink to='/login'><IoPersonCircleSharp style={{ fontSize: "40px" }} /> <span className="name-navbar">Login</span></NavLink>
+          <NavLink onClick={active} to='/login'><IoPersonCircleSharp style={{ fontSize: "40px" }} /> <span className="name-navbar">Login</span></NavLink>
         </div>
       </div>
     </div>
